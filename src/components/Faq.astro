@@ -1,0 +1,22 @@
+---
+import { faqs } from '../site.js';
+---
+<section id="faq" class="sec sec-cream">
+  <div style="max-width:780px;margin:0 auto;">
+    <div class="sec-head" style="margin-bottom:40px;">
+      <span class="pill pill-orange">Dúvidas frequentes</span>
+      <h2 class="h2" style="margin-bottom:0;">Tudo o que você precisa saber</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      {faqs.map((q, i) => (
+        <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+          <button class="faq-q js-faq" type="button">
+            <span>{q.q}</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">{q.a}</div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

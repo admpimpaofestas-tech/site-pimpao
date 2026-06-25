@@ -1,0 +1,36 @@
+---
+import { recreacao } from '../site.js';
+---
+<section id="recreacao" class="sec sec-green">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="wrap" style="position:relative;">
+    <div class="sec-head" style="max-width:720px;margin-bottom:44px;">
+      <span class="pill pill-glass">Única da região com recreação inclusa</span>
+      <h2 class="h2" style="color:#fff;">Recreação: o show da festa</h2>
+      <p class="quote">"Aqui, a festa não é só bonita... ela é vivida de verdade pelas crianças."</p>
+    </div>
+    <div class="rec-grid">
+      {recreacao.map((r) => (
+        <div class="rec-card">
+          <h3 class="rec-title">{r.titulo}</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            {r.itens.map((it) => (
+              <div class="rec-item"><span class="check">✓</span>{it}</div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mascote">
+      <div style="flex:none;width:clamp(140px,22vw,190px);">
+        <div class="mascote-ph"><span>foto do<br>mascote Pimpão</span></div>
+      </div>
+      <div style="flex:1 1 300px;min-width:260px;">
+        <span class="pill pill-gold">A atração mais esperada</span>
+        <h3 class="mascote-title">Conheça o mascote Pimpão</h3>
+        <p class="mascote-txt">Ele faz parte da nossa essência e está presente em todas as festas para animar, dançar e criar momentos inesquecíveis. Participa da baladinha, interage com os convidados e faz da hora do parabéns um verdadeiro show!</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import { atracoes } from '../site.js';
+---
+<section id="estrutura" class="sec sec-cream">
+  <div class="wrap">
+    <div class="estrutura-row">
+      <div style="flex:1 1 360px;min-width:300px;">
+        <span class="pill pill-teal">Nosso espaço</span>
+        <h2 class="h2 left">Playground: o lugar da diversão</h2>
+        <p class="lead left" style="margin-bottom:22px;">Tudo no piso térreo! Espaço kids e salão principal em ambientes separados, porém perfeitamente integrados para o conforto de todos. Um super espaço de atrações para a alegria da criançada.</p>
+        <div class="chips">
+          {atracoes.map((a) => (
+            <span class="chip"><span class="dot" style={`background:${a.color};`}></span>{a.nome}</span>
+          ))}
+        </div>
+      </div>
+      <div class="estrutura-grid">
+        <div class="ph ph-teal" style="grid-row:span 2;min-height:100%;"><span class="ph-tag">salão 400m²</span></div>
+        <div class="ph ph-yellow" style="aspect-ratio:1;"><span class="ph-tag">brinquedão</span></div>
+        <div class="ph ph-orange" style="aspect-ratio:1;"><span class="ph-tag">área baby</span></div>
+      </div>
+    </div>
+  </div>
+</section>

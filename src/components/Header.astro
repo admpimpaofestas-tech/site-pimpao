@@ -1,0 +1,35 @@
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="#inicio" class="hdr-logo"><img src="/uploads/logo-pimpao.svg" alt="Pimpão Casa de Festas" /></a>
+    <button class="hdr-burger" id="hdrBurger" aria-label="Abrir menu" aria-expanded="false" aria-controls="hdrNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="hdr-nav" id="hdrNav">
+      <a href="#sobre" class="nav-link nav-teal">Sobre</a>
+      <a href="#estrutura" class="nav-link nav-teal">Estrutura</a>
+      <a href="#recreacao" class="nav-link nav-teal">Recreação</a>
+      <a href="#festas" class="nav-link nav-orange">Festas</a>
+      <a href="#galeria" class="nav-link nav-orange">Galeria</a>
+      <a href="#depoimentos" class="nav-link nav-teal">Depoimentos</a>
+      <a href="#faq" class="nav-link nav-orange">FAQ</a>
+      <a href="#orcamento" class="btn-cta-sm hdr-cta-mobile">Solicitar Orçamento</a>
+    </nav>
+    <a href="#orcamento" class="btn-cta-sm hdr-cta-desktop">Solicitar Orçamento</a>
+  </div>
+</header>
+
+<script>
+  const burger = document.getElementById('hdrBurger');
+  const nav = document.getElementById('hdrNav');
+  const close = () => {
+    nav.classList.remove('is-open');
+    burger.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+  };
+  burger?.addEventListener('click', () => {
+    const open = nav.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+</script>

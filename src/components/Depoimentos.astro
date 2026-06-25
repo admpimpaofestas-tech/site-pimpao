@@ -1,0 +1,24 @@
+---
+import { depoimentos } from '../site.js';
+---
+<section id="depoimentos" class="sec sec-white">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:46px;">
+      <span class="pill pill-gold">O que falam de nós</span>
+      <h2 class="h2">Famílias que celebraram no Pimpão</h2>
+      <div style="display:inline-flex;align-items:center;gap:10px;"><span class="stars" style="font-size:20px;">★★★★★</span><span style="font:700 15px 'Nunito',sans-serif;color:#6f6873;">Nota 5 estrelas</span></div>
+    </div>
+    <div class="dep-grid">
+      {depoimentos.map((t) => (
+        <div class="dep-card">
+          <span class="stars" style="font-size:16px;margin-bottom:14px;">★★★★★</span>
+          <p class="dep-txt">"{t.txt}"</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="dep-av" style={`background:${t.av};`}>{t.inicial}</div>
+            <div><div class="dep-nome">{t.nome}</div><div class="dep-festa">{t.festa}</div></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

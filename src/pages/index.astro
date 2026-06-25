@@ -1,0 +1,707 @@
+---
+// ====== CONFIGURAÇÕES (edite aqui) ======
+const whatsappNumber = '5551991355903';
+const instagramUrl = 'https://instagram.com/pimpaobuffeteventos';
+
+// ====== Derivados ======
+const waNum = whatsappNumber.replace(/\D/g, '');
+const waLink =
+  'https://wa.me/' +
+  waNum +
+  '?text=' +
+  encodeURIComponent('Olá! Vim pelo site e gostaria de solicitar um orçamento para uma festa no Pimpão.');
+const ano = new Date().getFullYear();
+
+// ====== Dados ======
+const atracaoNomes = ['Brinquedão', 'Área Baby', 'La Bamba', 'Mini Roda Gigante', 'Big Jump', 'Tombo Legal', 'Carrossel de Carrinhos', 'Cama Elástica', 'Futebol', 'Mesa de pinturinhas', 'Air flow'];
+const atracoes = atracaoNomes.map((nome, i) => ({ nome, color: i % 2 === 0 ? '#56a99b' : '#ec7a55' }));
+
+const recreacao = [
+  { titulo: 'Recreação guiada', itens: ['Brincadeiras adaptadas por faixa etária', 'Gincanas interativas', 'Dinâmicas para todas as crianças'] },
+  { titulo: 'Diferenciais exclusivos', itens: ['Camarim com pintura artística', 'Esculturas em balões durante a festa', 'Baladinha infantil — o momento favorito!'] },
+  { titulo: 'Personalização temática', itens: ['Caça ao tesouro temática', 'Desafios personalizados', 'Atividades do universo do aniversariante'] },
+];
+
+const festas = [
+  { nome: 'Festas Brincantes', tag: 'Energia & movimento', desc: 'Foco total na energia da criançada: recreação guiada, gincanas e muita diversão. Praticidade sem abrir mão da qualidade.', accent: '#1d7567', tint: '#e9f5f2', popular: false },
+  { nome: 'Festas Clássicas', tag: 'O equilíbrio perfeito', desc: 'Estrutura impecável, gastronomia premium e recreação mágica. A experiência completa que une sofisticação e diversão.', accent: '#c85f3c', tint: '#fdeee7', popular: true },
+  { nome: 'Festa Exclusiva', tag: 'Experiência VIP', desc: 'Personalização 360°: identidade visual, gastronomia gourmet e atrações exclusivas. O projeto dos sonhos ganhando vida.', accent: '#a9802a', tint: '#fdf3da', popular: false },
+];
+
+const galTints = ['#e9f5f2', '#fdeee7', '#fdf3da', '#eaf1f8'];
+const galLabels = ['Festa temática', 'Decoração', 'Recreação', 'Mascote Pimpão', 'Playground', 'Mesa de doces', 'Baladinha', 'Camarim'];
+const galeria = galLabels.map((label, i) => ({ label, tint: galTints[i % galTints.length] }));
+
+const depBase = [
+  { nome: 'Carolina Morche', festa: 'Aniversário de 2 anos do Lucca', av: '#56a99b', txt: 'Pimpão foi a melhor escolha pro aniversário do nosso pequeno Lucca. Da decoração de Dino Baby aos garçons, às meninas no atendimento e ao pessoal dos brinquedos. Tudo entregue com excelência. Foi um momento incrível e nos sentimos imensamente amados. Recomendo muito!' },
+  { nome: 'Fabiana Consul Mendes', festa: 'Cliente Pimpão', av: '#ec7a55', txt: 'A melhor casa de festas de Cachoeirinha! São maravilhosos! As crianças amam o Pimpão. Comida top. Recreacionista Francisco muito criativo nas brincadeiras, nota mil. Espaço kids show!' },
+  { nome: 'Luiz Henrique Todt', festa: 'Festa com recreacionista', av: '#a9802a', txt: 'Queremos agradecer a toda equipe Pimpão pelo empenho e carinho com a festa da nossa filha! Recomendo a festa com recreacionista, vale muito a pena. A decoração foi impecável, a comida muito boa e quentinha, e os funcionários muito atenciosos!' },
+];
+const depoimentos = depBase.map((d) => ({ ...d, inicial: d.nome.charAt(0) }));
+
+const faqs = [
+  { q: 'Com quanta antecedência preciso reservar?', a: 'Recomendamos reservar com pelo menos 30 a 60 dias de antecedência, especialmente para fins de semana. Fale com a gente: às vezes conseguimos encaixar datas mais próximas.' },
+  { q: 'Qual a área de atendimento?', a: 'Estamos na Av. Flores da Cunha, 713 — Cachoeirinha (Parada 49) e atendemos toda a região metropolitana de Porto Alegre.' },
+  { q: 'Quais as formas de pagamento?', a: 'Parcele em até 10x sem juros no cartão, ganhe 5% de desconto à vista no PIX, ou use o parcelamento direto com a casa, sem cartão. Consulte condições especiais.' },
+  { q: 'A recreação está inclusa?', a: 'Sim! Somos a única casa da região com recreação inclusa: recreação guiada, camarim de pintura, esculturas em balões e a famosa baladinha infantil, sem custo adicional.' },
+  { q: 'Vocês personalizam o tema da festa?', a: 'Com certeza. Adaptamos toda a recreação e a decoração ao universo do aniversariante — para meninos e meninas, do super-herói ao mundo encantado.' },
+  { q: 'Qual a capacidade do espaço?', a: 'Nosso salão climatizado tem 400m² com playground completo. Informe o número estimado de convidados no orçamento e indicamos a melhor opção.' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pimpão Casa de Festas · Cachoeirinha</title>
+  <meta name="description" content="Festas mágicas para meninos e meninas em Cachoeirinha e região. Você curte, a gente cuida." />
+  <link rel="icon" type="image/svg+xml" href="/uploads/logo-pimpao.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="#inicio" class="hdr-logo"><img src="/uploads/logo-pimpao.svg" alt="Pimpão Casa de Festas" /></a>
+    <button class="hdr-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-mobile">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="hdr-nav" id="menu-mobile">
+      <a href="#sobre" class="nav-link nav-teal">Sobre</a>
+      <a href="#estrutura" class="nav-link nav-teal">Estrutura</a>
+      <a href="#recreacao" class="nav-link nav-teal">Recreação</a>
+      <a href="#festas" class="nav-link nav-orange">Festas</a>
+      <a href="#galeria" class="nav-link nav-orange">Galeria</a>
+      <a href="#depoimentos" class="nav-link nav-teal">Depoimentos</a>
+      <a href="#faq" class="nav-link nav-orange">FAQ</a>
+      <a href="#orcamento" class="btn-cta-sm nav-cta-mobile">Solicitar Orçamento</a>
+    </nav>
+    <a href="#orcamento" class="btn-cta-sm hdr-cta-desk">Solicitar Orçamento</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="inicio" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <div class="hero-content">
+    <span class="hero-badge"><span class="dot-yellow"></span>Casa de festas infantis · Cachoeirinha</span>
+    <h1 class="hero-title">Onde cada festa vira <span style="color:#f7b24a;">memória</span> inesquecível</h1>
+    <p class="hero-sub">Festas mágicas para meninos e meninas em Cachoeirinha e região. <strong style="color:#fff;">Você curte, a gente cuida.</strong></p>
+    <div style="margin:26px 0 0;">
+      <a href="#orcamento" class="btn-cta-lg">Solicitar Orçamento</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOBRE + DIFERENCIAIS ============ -->
+<section id="sobre" class="sec sec-white">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill pill-orange">Quem somos</span>
+      <h2 class="h2">Especialistas em transformar momentos em memórias</h2>
+      <p class="lead">Com mais de 10 anos de experiência no mercado de festas, oferecemos localização privilegiada, equipe completa e operação impecável para você aproveitar cada detalhe sem preocupações. Mais do que um espaço — uma festa vivida de verdade.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card-lift">
+        <div class="ic ic-teal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></div>
+        <h3 class="h3">Localização privilegiada</h3>
+        <p class="muted">Ponto estratégico com fácil acesso e total conveniência — Av. Flores da Cunha, Cachoeirinha.</p>
+      </div>
+      <div class="card-lift">
+        <div class="ic ic-teal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a2 2 0 0 0 4 0V3M7 11v10"></path><path d="M16 3c-1.5 0-2.5 2-2.5 5s1 5 2.5 5 2.5-2 2.5-5-1-5-2.5-5zM16 13v8"></path></svg></div>
+        <h3 class="h3">Gastronomia completa</h3>
+        <p class="muted">Cardápio premium preparado na hora, com aquele sabor inconfundível de comida caseira.</p>
+      </div>
+      <div class="card-lift">
+        <div class="ic ic-teal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"></circle><path d="M9.5 20l1-4.2M14.5 20l-1-4.2M9 21h6"></path></svg></div>
+        <h3 class="h3">Recreação única da região</h3>
+        <p class="muted">Camarim, esculturas, brincadeiras exclusivas e muita energia para garantir a melhor festa.</p>
+      </div>
+      <div class="card-lift">
+        <div class="ic ic-teal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.1 4.5L19 8.2l-3.5 3.5.9 5L12 14.6 7.6 16.7l.9-5L5 8.2l4.9-.7L12 3z"></path></svg></div>
+        <h3 class="h3">Decoração personalizada</h3>
+        <p class="muted">Cenografias encantadoras que transformam qualquer tema e sonho em realidade mágica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESTRUTURA / PLAYGROUND ============ -->
+<section id="estrutura" class="sec sec-cream">
+  <div class="wrap">
+    <div class="estrutura-row">
+      <div style="flex:1 1 360px;min-width:300px;">
+        <span class="pill pill-teal">Nosso espaço</span>
+        <h2 class="h2 left">Playground: o lugar da diversão</h2>
+        <p class="lead left" style="margin-bottom:22px;">Tudo no piso térreo! Espaço kids e salão principal em ambientes separados, porém perfeitamente integrados para o conforto de todos. Um super espaço de atrações para a alegria da criançada.</p>
+        <div class="chips">
+          {atracoes.map((a) => (
+            <span class="chip"><span class="dot" style={`background:${a.color};`}></span>{a.nome}</span>
+          ))}
+        </div>
+      </div>
+      <div class="estrutura-grid">
+        <div class="ph ph-teal" style="grid-row:span 2;min-height:100%;"><span class="ph-tag">salão 400m²</span></div>
+        <div class="ph ph-yellow" style="aspect-ratio:1;"><span class="ph-tag">brinquedão</span></div>
+        <div class="ph ph-orange" style="aspect-ratio:1;"><span class="ph-tag">área baby</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECREAÇÃO + MASCOTE ============ -->
+<section id="recreacao" class="sec sec-green">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="wrap" style="position:relative;">
+    <div class="sec-head" style="max-width:720px;margin-bottom:44px;">
+      <span class="pill pill-glass">Única da região com recreação inclusa</span>
+      <h2 class="h2" style="color:#fff;">Recreação: o show da festa</h2>
+      <p class="quote">"Aqui, a festa não é só bonita... ela é vivida de verdade pelas crianças."</p>
+    </div>
+    <div class="rec-grid">
+      {recreacao.map((r) => (
+        <div class="rec-card">
+          <h3 class="rec-title">{r.titulo}</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            {r.itens.map((it) => (
+              <div class="rec-item"><span class="check">✓</span>{it}</div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mascote">
+      <div style="flex:none;width:clamp(140px,22vw,190px);">
+        <div class="mascote-ph"><span>foto do<br>mascote Pimpão</span></div>
+      </div>
+      <div style="flex:1 1 300px;min-width:260px;">
+        <span class="pill pill-gold">A atração mais esperada</span>
+        <h3 class="mascote-title">Conheça o mascote Pimpão</h3>
+        <p class="mascote-txt">Ele faz parte da nossa essência e está presente em todas as festas para animar, dançar e criar momentos inesquecíveis. Participa da baladinha, interage com os convidados e faz da hora do parabéns um verdadeiro show!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FESTAS (TIPOS/ESTILOS) ============ -->
+<section id="festas" class="sec sec-white">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:46px;">
+      <span class="pill pill-orange">Tipos de festa</span>
+      <h2 class="h2">Um estilo de festa para cada sonho</h2>
+      <p class="lead">Da celebração mais brincante à experiência exclusiva e personalizada. Conte o que você imagina e montamos um orçamento sob medida.</p>
+    </div>
+    <div class="festas-grid">
+      {festas.map((f) => (
+        <div class="festa-card">
+          <div class="festa-img" style={`background:${f.tint};`}>
+            <span class="ph-tag">foto · {f.nome}</span>
+            {f.popular && <span class="badge-pop">Mais popular</span>}
+          </div>
+          <div class="festa-body">
+            <span class="festa-tag" style={`color:${f.accent};`}>{f.tag}</span>
+            <h3 class="festa-nome">{f.nome}</h3>
+            <p class="muted" style="flex:1;">{f.desc}</p>
+            <a href="#orcamento" class="festa-link" style={`color:${f.accent};`}>Pedir orçamento <span style="font-size:17px;">→</span></a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style="margin-top:44px;text-align:center;">
+      <span class="incluso-title">Incluso em todas as festas</span>
+      <div class="incluso-row">
+        <div class="incluso-item">
+          <span class="incluso-ic ic-teal"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M3.5 7l17 10M20.5 7l-17 10"></path><path d="M12 6l2.2-2.2M12 6L9.8 3.8M12 18l2.2 2.2M12 18l-2.2 2.2"></path></svg></span>
+          <span class="incluso-txt">Espaço climatizado 400m²</span>
+        </div>
+        <div class="incluso-item">
+          <span class="incluso-ic ic-orange"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"></circle><path d="M12 15v5M10 21h4"></path></svg></span>
+          <span class="incluso-txt">Playground completo</span>
+        </div>
+        <div class="incluso-item">
+          <span class="incluso-ic ic-gold"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"></path><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8 8 0 0 1 0 12"></path></svg></span>
+          <span class="incluso-txt">Som ambiente &amp; projeção</span>
+        </div>
+        <div class="incluso-item">
+          <span class="incluso-ic ic-teal"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="2.5"></circle><path d="M12 8.5C12 5 14 4 16 5s.5 4-4 3.5M12 8.5C12 5 10 4 8 5s-.5 4 4 3.5M12 13.5V21"></path></svg></span>
+          <span class="incluso-txt">Arranjos de mesa</span>
+        </div>
+        <div class="incluso-item">
+          <span class="incluso-ic ic-orange"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="1"></rect><path d="M3 9h18M12 9v11M12 9c-3 0-5-1-5-3s3-2 5 3c2-5 5-3 5-3s-2 3-5 3z"></path></svg></span>
+          <span class="incluso-txt">Expositor de lembranças</span>
+        </div>
+      </div>
+    </div>
+    <p class="pagamento">
+      <strong style="color:#6f6873;font-weight:700;">Pagamento facilitado:</strong> em até 10x sem juros no cartão de crédito · 5% de desconto à vista no PIX · ou parcelamento direto com a casa, sem cartão.
+    </p>
+  </div>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section id="galeria" class="sec sec-cream">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:44px;">
+      <span class="pill pill-teal">Portfólio</span>
+      <h2 class="h2">Festas que já aconteceram aqui</h2>
+      <p class="lead">Um pouquinho da magia que montamos. Clique para ampliar — em breve, com as fotos reais dos eventos.</p>
+    </div>
+    <div class="galeria-grid">
+      {galeria.map((g, i) => (
+        <button class="gal-item js-gal" data-index={i} data-label={g.label} data-tint={g.tint} style={`background:${g.tint};`}>
+          <span class="ph-tag">{g.label}</span>
+          <span class="gal-zoom">⤢</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS ============ -->
+<section id="depoimentos" class="sec sec-white">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:46px;">
+      <span class="pill pill-gold">O que falam de nós</span>
+      <h2 class="h2">Famílias que celebraram no Pimpão</h2>
+      <div style="display:inline-flex;align-items:center;gap:10px;"><span class="stars" style="font-size:20px;">★★★★★</span><span style="font:700 15px 'Nunito',sans-serif;color:#6f6873;">Nota 5 estrelas</span></div>
+    </div>
+    <div class="dep-grid">
+      {depoimentos.map((t) => (
+        <div class="dep-card">
+          <span class="stars" style="font-size:16px;margin-bottom:14px;">★★★★★</span>
+          <p class="dep-txt">"{t.txt}"</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="dep-av" style={`background:${t.av};`}>{t.inicial}</div>
+            <div><div class="dep-nome">{t.nome}</div><div class="dep-festa">{t.festa}</div></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="sec sec-cream">
+  <div style="max-width:780px;margin:0 auto;">
+    <div class="sec-head" style="margin-bottom:40px;">
+      <span class="pill pill-orange">Dúvidas frequentes</span>
+      <h2 class="h2" style="margin-bottom:0;">Tudo o que você precisa saber</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      {faqs.map((q, i) => (
+        <div class={`faq-item${i === 0 ? ' open' : ''}`}>
+          <button class="faq-q js-faq" type="button">
+            <span>{q.q}</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">{q.a}</div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============ ORÇAMENTO (FORM) ============ -->
+<section id="orcamento" class="sec sec-white">
+  <div class="orc-wrap">
+    <div style="flex:1 1 320px;min-width:280px;">
+      <span class="pill pill-teal">Solicite seu orçamento</span>
+      <h2 class="h2 left">Fale com a Fê e a Mari!</h2>
+      <p class="lead left" style="margin-bottom:26px;">Garanta a sua data agora e comece a sonhar com a festa perfeita. Preencha os dados e enviaremos tudo direto no seu WhatsApp.</p>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <a href={waLink} target="_blank" rel="noopener" class="orc-wa">
+          <span class="orc-wa-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"></path></svg></span>
+          <span><span style="display:block;font:700 13px 'Nunito',sans-serif;color:#1d7567;">WhatsApp</span><span style="display:block;font-family:'Baloo 2',cursive;font-weight:700;font-size:18px;color:#3a3340;">(51) 99135-5903</span></span>
+        </a>
+        <div class="orc-loc">
+          <span class="orc-loc-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"></path></svg></span>
+          <span><span style="display:block;font:700 13px 'Nunito',sans-serif;color:#c85f3c;">Onde estamos</span><span style="display:block;font:700 15px 'Nunito',sans-serif;color:#3a3340;">Av. Flores da Cunha, 713 · Cachoeirinha (Parada 49)</span></span>
+        </div>
+      </div>
+    </div>
+    <div style="flex:1 1 380px;min-width:300px;">
+      <form id="orcForm" data-wa={waNum} class="orc-form">
+        <div class="orc-fields">
+          <div style="grid-column:1/-1;">
+            <label class="lbl">Nome</label>
+            <input name="nome" type="text" placeholder="Seu nome" class="inp" />
+          </div>
+          <div>
+            <label class="lbl">Telefone</label>
+            <input name="telefone" type="tel" placeholder="(51) 9 9999-9999" class="inp" />
+          </div>
+          <div>
+            <label class="lbl">Data do evento</label>
+            <input name="data" type="date" class="inp" />
+          </div>
+          <div>
+            <label class="lbl">Tipo de festa</label>
+            <select name="tipo" class="inp">
+              <option value="">Selecione</option>
+              <option value="Aniversário infantil">Aniversário infantil</option>
+              <option value="Festa temática">Festa temática</option>
+              <option value="Chá de bebê / revelação">Chá de bebê / revelação</option>
+              <option value="Festa Brincante">Festa Brincante</option>
+              <option value="Festa Clássica">Festa Clássica</option>
+              <option value="Festa Exclusiva">Festa Exclusiva</option>
+              <option value="Ainda não sei">Ainda não sei</option>
+            </select>
+          </div>
+          <div>
+            <label class="lbl">Nº de convidados</label>
+            <input name="convidados" type="number" min="1" placeholder="Ex: 40" class="inp" />
+          </div>
+          <div style="grid-column:1/-1;">
+            <label class="lbl">Mensagem</label>
+            <textarea name="mensagem" rows="3" placeholder="Conte o tema, idade do aniversariante, o que imagina..." class="inp" style="resize:vertical;"></textarea>
+          </div>
+          <button type="submit" class="btn-wa"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"></path></svg>Enviar pelo WhatsApp</button>
+          <p style="grid-column:1/-1;margin:0;text-align:center;font:500 13px 'Nunito',sans-serif;color:#9a9098;">Ao enviar, abriremos o WhatsApp com sua mensagem pronta. 💛</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ft">
+  <div class="ft-grid">
+    <div>
+      <img src="/uploads/logo-pimpao.svg" alt="Pimpão Casa de Festas" class="ft-logo" />
+      <p class="ft-about">A casa de festas onde cada momento vira memória. Você curte, a gente cuida.</p>
+      <div style="display:flex;gap:10px;">
+        <a href={instagramUrl} target="_blank" rel="noopener" aria-label="Instagram" class="ft-soc ft-soc-ig"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"></circle></svg></a>
+        <a href={waLink} target="_blank" rel="noopener" aria-label="WhatsApp" class="ft-soc ft-soc-wa"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"></path></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="ft-h">Contato</h4>
+      <div class="ft-links">
+        <a href={waLink} target="_blank" rel="noopener">WhatsApp · (51) 99135-5903</a>
+        <a href={instagramUrl} target="_blank" rel="noopener">@pimpaobuffeteventos</a>
+        <span>@arterosa.festas</span>
+        <span>Av. Flores da Cunha, 713<br>Cachoeirinha (Parada 49) · RS</span>
+      </div>
+    </div>
+    <div>
+      <h4 class="ft-h">Navegação</h4>
+      <div class="ft-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#estrutura">Estrutura</a>
+        <a href="#recreacao">Recreação</a>
+        <a href="#festas">Tipos de festa</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#orcamento">Orçamento</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="ft-h">Onde estamos</h4>
+      <div class="ft-map">
+        <iframe title="Mapa Pimpão" src="https://www.google.com/maps?q=Av.+Flores+da+Cunha,+713,+Cachoeirinha+RS&output=embed" loading="lazy"></iframe>
+      </div>
+      <p style="font:600 14px 'Nunito',sans-serif;color:#c8bed4;margin:12px 0 0;">Visitas com hora marcada — agende pelo WhatsApp.</p>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© {ano} Pimpão Casa de Festas. Todos os direitos reservados.</span>
+    <span>Cachoeirinha e região metropolitana de Porto Alegre.</span>
+  </div>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div id="lightbox" class="lb" hidden>
+  <div class="lb-card-wrap">
+    <div id="lbCard" class="lb-card"><span id="lbLabel" class="lb-label"></span></div>
+    <button id="lbClose" class="lb-close" aria-label="Fechar">×</button>
+  </div>
+</div>
+
+<!-- ============ WHATSAPP FAB ============ -->
+<a href={waLink} target="_blank" rel="noopener" aria-label="WhatsApp" class="fab">
+  <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"></path></svg>
+</a>
+
+<script>
+  // Menu mobile (hambúrguer)
+  const burger = document.querySelector('.hdr-burger');
+  const menuNav = document.getElementById('menu-mobile');
+  if (burger && menuNav) {
+    const closeMenu = () => {
+      menuNav.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    };
+    burger.addEventListener('click', () => {
+      const isOpen = menuNav.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+    menuNav.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.js-faq').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach((el) => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Lightbox da galeria
+  const lb = document.getElementById('lightbox');
+  const lbCard = document.getElementById('lbCard');
+  const lbLabel = document.getElementById('lbLabel');
+  const openLb = (label, tint) => {
+    lbLabel.textContent = label;
+    lbCard.style.background = tint;
+    lb.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+  const closeLb = () => {
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  };
+  document.querySelectorAll('.js-gal').forEach((b) => {
+    b.addEventListener('click', () => openLb(b.dataset.label, b.dataset.tint));
+  });
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb || e.target.id === 'lbClose') closeLb();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lb.hidden) closeLb();
+  });
+
+  // Formulário -> WhatsApp
+  const form = document.getElementById('orcForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const v = (k) => (fd.get(k) || '').toString().trim() || '-';
+    const lines = [
+      'Olá! Gostaria de solicitar um orçamento de festa no Pimpão.',
+      '',
+      'Nome: ' + v('nome'),
+      'Telefone: ' + v('telefone'),
+      'Data do evento: ' + v('data'),
+      'Tipo de festa: ' + v('tipo'),
+      'Nº de convidados: ' + v('convidados'),
+      'Mensagem: ' + v('mensagem'),
+    ];
+    const waNum = form.dataset.wa;
+    window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
+  });
+</script>
+
+<style is:global>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fdf8f1; font-family: 'Nunito', sans-serif; -webkit-font-smoothing: antialiased; color: #3a3340; }
+  @keyframes pulsate { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.45); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+  /* ---- HEADER ---- */
+  .hdr { position: sticky; top: 0; z-index: 40; background: rgba(253,248,241,.9); backdrop-filter: blur(10px); border-bottom: 1px solid #f0e8db; }
+  .hdr-inner { max-width: 1200px; margin: 0 auto; padding: 11px 24px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+  .hdr-logo { display: flex; align-items: center; flex: none; }
+  .hdr-logo img { height: 46px; width: auto; display: block; }
+  .hdr-nav { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+  .nav-link { padding: 8px 12px; border-radius: 999px; font: 700 15px 'Nunito', sans-serif; color: #5a5360; text-decoration: none; transition: .15s; }
+  .nav-teal:hover { background: #e9f5f2; color: #1d7567; }
+  .nav-orange:hover { background: #fdeee7; color: #c85f3c; }
+  .btn-cta-sm { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 999px; background: #ec7a55; color: #fff; font: 800 15px 'Nunito', sans-serif; text-decoration: none; box-shadow: 0 8px 18px -8px rgba(236,122,85,.7); transition: transform .15s; }
+  .btn-cta-sm:hover { transform: translateY(-2px); }
+  .hdr-burger { display: none; flex: none; width: 44px; height: 44px; padding: 10px; background: none; border: 0; cursor: pointer; border-radius: 12px; }
+  .hdr-burger span { display: block; height: 3px; border-radius: 3px; background: #3a3340; transition: transform .25s, opacity .2s; }
+  .hdr-burger span + span { margin-top: 5px; }
+  .hdr-burger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hdr-burger.open span:nth-child(2) { opacity: 0; }
+  .hdr-burger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .nav-cta-mobile { display: none; }
+
+  @media (max-width: 860px) {
+    .hdr-inner { flex-wrap: nowrap; padding: 10px 18px; }
+    .hdr-burger { display: block; }
+    .hdr-cta-desk { display: none; }
+    .hdr-nav {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 4px;
+      background: #fdf8f1; border-bottom: 1px solid #f0e8db;
+      padding: 12px 18px 18px;
+      box-shadow: 0 16px 24px -16px rgba(0,0,0,.25);
+      max-height: 0; overflow: hidden; opacity: 0; visibility: hidden;
+      transition: max-height .3s ease, opacity .25s ease, visibility .25s;
+    }
+    .hdr-nav.open { max-height: 90vh; opacity: 1; visibility: visible; }
+    .hdr-nav .nav-link { padding: 13px 14px; font-size: 17px; }
+    .nav-cta-mobile { display: inline-flex; justify-content: center; margin-top: 8px; width: 100%; }
+  }
+
+  /* ---- HERO ---- */
+  .hero { position: relative; overflow: hidden; height: 500px; max-height: 500px; display: flex; align-items: center; padding: 40px 24px; scroll-margin-top: 80px; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background-image: url('/uploads/fundo-hero.webp'); background-size: cover; background-position: center; }
+  .hero-ov1 { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg,rgba(40,34,46,.42) 0%,rgba(40,34,46,.30) 38%,rgba(40,34,46,.62) 100%); }
+  .hero-ov2 { position: absolute; inset: 0; z-index: 1; background: radial-gradient(120% 90% at 28% 42%,rgba(40,34,46,.55) 0%,rgba(40,34,46,0) 60%); }
+  .hero-content { position: relative; z-index: 3; max-width: 1200px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(6px); color: #fff; font: 800 12px/1 'Nunito', sans-serif; letter-spacing: .05em; text-transform: uppercase; }
+  .dot-yellow { width: 8px; height: 8px; border-radius: 50%; background: #f3c969; display: inline-block; }
+  .hero-title { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: clamp(34px,5vw,56px); line-height: 1.02; color: #fff; margin: 16px 0 0; max-width: 15ch; text-shadow: 0 6px 30px rgba(0,0,0,.45); }
+  .hero-sub { font: 600 clamp(15px,1.5vw,18px)/1.5 'Nunito', sans-serif; color: rgba(255,255,255,.92); max-width: 42ch; margin: 16px 0 0; text-shadow: 0 2px 16px rgba(0,0,0,.4); }
+  .btn-cta-lg { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 999px; background: #ec7a55; color: #fff; font: 800 18px 'Nunito', sans-serif; text-decoration: none; box-shadow: 0 16px 36px -14px rgba(236,122,85,.85); transition: transform .15s, box-shadow .15s; }
+  .btn-cta-lg:hover { transform: translateY(-3px); box-shadow: 0 22px 44px -14px rgba(236,122,85,.95); }
+
+  /* ---- SECTIONS GENÉRICO ---- */
+  .sec { padding: clamp(60px,8vw,104px) 24px; scroll-margin-top: 80px; position: relative; }
+  .sec-white { background: #fff; }
+  .sec-cream { background: #fdf8f1; }
+  .sec-green { background: linear-gradient(160deg,#56a99b 0%,#3f8d80 100%); overflow: hidden; }
+  .wrap { max-width: 1140px; margin: 0 auto; }
+  .sec-head { text-align: center; max-width: 680px; margin: 0 auto; }
+  .h2 { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: clamp(30px,4.4vw,48px); line-height: 1.06; color: #3a3340; margin: 16px 0 14px; }
+  .h2.left { text-align: left; }
+  .h3 { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 20px; color: #3a3340; margin: 0 0 8px; }
+  .lead { font: 500 clamp(16px,1.6vw,19px)/1.65 'Nunito', sans-serif; color: #6f6873; margin: 0; }
+  .muted { font: 500 15px/1.55 'Nunito', sans-serif; color: #6f6873; margin: 0; }
+  .pill { display: inline-block; padding: 7px 16px; border-radius: 999px; font: 800 13px/1 'Nunito', sans-serif; letter-spacing: .04em; text-transform: uppercase; }
+  .pill-orange { background: #fdeee7; color: #c85f3c; }
+  .pill-teal { background: #e9f5f2; color: #1d7567; }
+  .pill-gold { background: #fdf3da; color: #a9802a; }
+  .pill-glass { background: rgba(255,255,255,.2); color: #fff; }
+
+  /* ---- SOBRE cards ---- */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 22px; margin-top: 48px; }
+  .card-lift { background: #fdf8f1; border: 1px solid #f0e8db; border-radius: 24px; padding: 28px 24px; transition: transform .18s, box-shadow .18s; }
+  .card-lift:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -22px rgba(0,0,0,.16); }
+  .ic { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 16px; }
+  .ic-teal { background: #e9f5f2; color: #1d7567; }
+  .ic-orange { background: #fdeee7; color: #c85f3c; }
+  .ic-gold { background: #fdf3da; color: #a9802a; }
+
+  /* ---- ESTRUTURA ---- */
+  .estrutura-row { display: flex; gap: clamp(32px,5vw,60px); flex-wrap: wrap; align-items: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: #fff; border: 1px solid #ece3d5; font: 700 14px 'Nunito', sans-serif; color: #4a4450; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .estrutura-grid { flex: 1 1 320px; min-width: 280px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ph { border-radius: 22px; display: grid; place-items: center; }
+  .ph-teal { background: repeating-linear-gradient(135deg,#e9f5f2 0 18px,#dff0eb 18px 36px); }
+  .ph-yellow { background: repeating-linear-gradient(135deg,#fdf3da 0 18px,#faecc8 18px 36px); }
+  .ph-orange { background: repeating-linear-gradient(135deg,#fdeee7 0 18px,#fae0d4 18px 36px); }
+  .ph-tag { font-family: ui-monospace, monospace; font-size: 12px; color: #9a8e7e; background: rgba(255,255,255,.8); padding: 6px 12px; border-radius: 999px; }
+  .ph-teal .ph-tag { color: #56998c; }
+  .ph-yellow .ph-tag { color: #b89545; }
+  .ph-orange .ph-tag { color: #cd7a58; }
+
+  /* ---- RECREAÇÃO ---- */
+  .blob { position: absolute; border-radius: 50%; }
+  .blob-1 { top: -40px; right: -30px; width: 200px; height: 200px; background: rgba(255,255,255,.06); }
+  .blob-2 { bottom: -60px; left: -40px; width: 240px; height: 240px; background: rgba(255,255,255,.05); }
+  .quote { font: 600 clamp(17px,1.8vw,21px)/1.5 'Nunito', sans-serif; color: #e2f3ef; margin: 0; font-style: italic; }
+  .rec-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 18px; }
+  .rec-card { background: rgba(255,255,255,.97); border-radius: 24px; padding: 26px 24px; }
+  .rec-title { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 20px; color: #1d7567; margin: 0 0 14px; }
+  .rec-item { display: flex; align-items: flex-start; gap: 10px; font: 600 15px/1.45 'Nunito', sans-serif; color: #4a4450; }
+  .check { flex: none; margin-top: 1px; color: #ec7a55; font-weight: 800; }
+  .mascote { display: flex; gap: clamp(24px,4vw,48px); flex-wrap: wrap; align-items: center; margin-top: 38px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 30px; padding: clamp(24px,3vw,36px); }
+  .mascote-ph { aspect-ratio: 1; border-radius: 24px; overflow: hidden; background: repeating-linear-gradient(135deg,rgba(255,255,255,.22) 0 16px,rgba(255,255,255,.12) 16px 32px); display: grid; place-items: center; border: 3px solid rgba(255,255,255,.4); }
+  .mascote-ph span { font-family: ui-monospace, monospace; font-size: 11px; color: #fff; text-align: center; padding: 0 8px; line-height: 1.5; }
+  .mascote-title { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: clamp(24px,3vw,34px); color: #fff; margin: 12px 0 10px; }
+  .mascote-txt { font: 600 clamp(15px,1.6vw,17px)/1.55 'Nunito', sans-serif; color: #e2f3ef; margin: 0; }
+
+  /* ---- FESTAS ---- */
+  .festas-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
+  .festa-card { position: relative; background: #fdf8f1; border: 1px solid #f0e8db; border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; transition: transform .18s, box-shadow .18s; }
+  .festa-card:hover { transform: translateY(-6px); box-shadow: 0 24px 46px -24px rgba(0,0,0,.2); }
+  .festa-img { aspect-ratio: 16/10; position: relative; display: grid; place-items: center; }
+  .badge-pop { position: absolute; top: 14px; right: 14px; padding: 6px 13px; border-radius: 999px; background: #ec7a55; color: #fff; font: 800 11px/1 'Nunito', sans-serif; letter-spacing: .03em; text-transform: uppercase; }
+  .festa-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .festa-tag { font: 800 12px/1 'Nunito', sans-serif; letter-spacing: .05em; text-transform: uppercase; }
+  .festa-nome { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 24px; color: #3a3340; margin: 0; }
+  .festa-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; font: 800 15px 'Nunito', sans-serif; text-decoration: none; }
+  .incluso-title { display: inline-block; font: 800 13px 'Nunito', sans-serif; color: #1d7567; text-transform: uppercase; letter-spacing: .06em; }
+  .incluso-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 34px; margin-top: 26px; }
+  .incluso-item { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 128px; }
+  .incluso-ic { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; }
+  .incluso-txt { font: 700 14px/1.35 'Nunito', sans-serif; color: #3a3340; }
+  .pagamento { margin: 32px auto 0; max-width: 680px; text-align: center; font: 500 15px/1.7 'Nunito', sans-serif; color: #8a8290; }
+
+  /* ---- GALERIA ---- */
+  .galeria-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 16px; }
+  .gal-item { border: none; padding: 0; cursor: pointer; border-radius: 22px; overflow: hidden; aspect-ratio: 1; position: relative; display: grid; place-items: center; transition: transform .18s; }
+  .gal-item:hover { transform: scale(1.02); }
+  .gal-item .ph-tag { color: #8d8170; }
+  .gal-zoom { position: absolute; bottom: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; color: #3a3340; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,.12); }
+
+  /* ---- DEPOIMENTOS ---- */
+  .stars { color: #f3c969; letter-spacing: 2px; display: inline-block; }
+  .dep-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
+  .dep-card { background: #fdf8f1; border: 1px solid #f0e8db; border-radius: 24px; padding: 28px 26px; display: flex; flex-direction: column; }
+  .dep-txt { font: 500 15px/1.65 'Nunito', sans-serif; color: #4a4450; margin: 0 0 20px; flex: 1; }
+  .dep-av { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-family: 'Baloo 2', cursive; font-weight: 800; color: #fff; font-size: 18px; flex: none; }
+  .dep-nome { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 16px; color: #3a3340; }
+  .dep-festa { font: 600 13px 'Nunito', sans-serif; color: #8a8290; }
+
+  /* ---- FAQ ---- */
+  .faq-item { background: #fff; border: 1px solid #f0e8db; border-radius: 18px; overflow: hidden; }
+  .faq-q { width: 100%; border: none; background: none; cursor: pointer; padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; text-align: left; font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 18px; color: #3a3340; }
+  .faq-icon { flex: none; width: 30px; height: 30px; border-radius: 50%; background: #fdeee7; color: #ec7a55; display: grid; place-items: center; font-size: 20px; transition: transform .2s; }
+  .faq-item.open .faq-icon { background: #ec7a55; color: #fff; transform: rotate(45deg); }
+  .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease; }
+  .faq-item.open .faq-a { grid-template-rows: 1fr; }
+  .faq-a-inner { overflow: hidden; }
+  .faq-item.open .faq-a-inner { padding: 0 22px 22px; }
+  .faq-a-inner { font: 500 15px/1.65 'Nunito', sans-serif; color: #6f6873; }
+
+  /* ---- ORÇAMENTO ---- */
+  .orc-wrap { max-width: 1080px; margin: 0 auto; display: flex; gap: clamp(32px,5vw,56px); flex-wrap: wrap; }
+  .orc-wa { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; background: #e9f5f2; border-radius: 16px; padding: 16px 18px; }
+  .orc-wa-ic { width: 42px; height: 42px; border-radius: 12px; background: #25D366; display: grid; place-items: center; flex: none; color: #fff; }
+  .orc-loc { display: inline-flex; align-items: center; gap: 12px; background: #fdf8f1; border: 1px solid #f0e8db; border-radius: 16px; padding: 16px 18px; }
+  .orc-loc-ic { width: 42px; height: 42px; border-radius: 12px; background: #fdeee7; display: grid; place-items: center; flex: none; color: #ec7a55; }
+  .orc-form { background: #fdf8f1; border: 1px solid #f0e8db; border-radius: 26px; padding: clamp(24px,3vw,34px); }
+  .orc-fields { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 16px; }
+  .lbl { display: block; font: 700 14px 'Nunito', sans-serif; color: #3a3340; margin-bottom: 6px; }
+  .inp { width: 100%; padding: 14px 16px; border: 1.5px solid #ece3d5; border-radius: 14px; font: 500 16px 'Nunito', sans-serif; color: #3a3340; background: #fff; outline: none; transition: border-color .15s; }
+  .inp:focus { border-color: #56a99b; }
+  .btn-wa { grid-column: 1/-1; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 17px; border: none; border-radius: 999px; background: #25D366; color: #fff; font: 800 18px 'Nunito', sans-serif; cursor: pointer; box-shadow: 0 14px 28px -12px rgba(37,211,102,.6); transition: transform .15s; }
+  .btn-wa:hover { transform: translateY(-2px); }
+
+  /* ---- FOOTER ---- */
+  .ft { background: #2e2733; color: #e8e2ee; padding: clamp(52px,7vw,80px) 24px 28px; }
+  .ft-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 36px; }
+  .ft-logo { height: 54px; width: auto; display: block; margin-bottom: 16px; }
+  .ft-about { font: 500 15px/1.6 'Nunito', sans-serif; color: #b8aec4; margin: 0 0 18px; max-width: 30ch; }
+  .ft-soc { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,.08); display: grid; place-items: center; color: #e8e2ee; transition: .15s; }
+  .ft-soc-ig:hover { background: #ec7a55; }
+  .ft-soc-wa:hover { background: #25D366; }
+  .ft-h { font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 17px; color: #fff; margin: 0 0 14px; }
+  .ft-links { display: flex; flex-direction: column; gap: 10px; font: 600 15px 'Nunito', sans-serif; color: #c8bed4; }
+  .ft-links a, .ft-links span { color: #c8bed4; text-decoration: none; }
+  .ft-links a:hover { color: #fff; }
+  .ft-map { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); height: 150px; }
+  .ft-map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.2); }
+  .ft-bottom { max-width: 1140px; margin: 34px auto 0; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.1); display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; font: 500 13px 'Nunito', sans-serif; color: #8d8398; }
+
+  /* ---- LIGHTBOX ---- */
+  .lb { position: fixed; inset: 0; z-index: 90; background: rgba(40,34,46,.86); backdrop-filter: blur(4px); display: grid; place-items: center; padding: 24px; }
+  .lb[hidden] { display: none; }
+  .lb-card-wrap { position: relative; width: min(620px,92vw); }
+  .lb-card { aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; display: grid; place-items: center; border: 4px solid #fff; }
+  .lb-label { font-family: ui-monospace, monospace; font-size: 14px; color: #fff; background: rgba(0,0,0,.25); padding: 8px 16px; border-radius: 999px; }
+  .lb-close { position: absolute; top: -16px; right: -16px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: #3a3340; font-size: 22px; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,.3); }
+
+  /* ---- WHATSAPP FAB ---- */
+  .fab { position: fixed; bottom: 24px; right: 24px; z-index: 80; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: grid; place-items: center; color: #fff; box-shadow: 0 12px 28px -8px rgba(37,211,102,.7); animation: pulsate 2.4s infinite; transition: transform .15s; }
+  .fab:hover { transform: scale(1.08); }
+</style>
+
+</body>
+</html>

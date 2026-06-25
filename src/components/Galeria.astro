@@ -1,0 +1,20 @@
+---
+import { galeria } from '../site.js';
+---
+<section id="galeria" class="sec sec-cream">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:44px;">
+      <span class="pill pill-teal">Portfólio</span>
+      <h2 class="h2">Festas que já aconteceram aqui</h2>
+      <p class="lead">Um pouquinho da magia que montamos. Clique para ampliar — em breve, com as fotos reais dos eventos.</p>
+    </div>
+    <div class="galeria-grid">
+      {galeria.map((g, i) => (
+        <button class="gal-item js-gal" data-index={i} data-label={g.label} data-tint={g.tint} style={`background:${g.tint};`}>
+          <span class="ph-tag">{g.label}</span>
+          <span class="gal-zoom">⤢</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>

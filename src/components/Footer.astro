@@ -1,0 +1,46 @@
+---
+import { waLink, instagramUrl, ano } from '../site.js';
+---
+<footer class="ft">
+  <div class="ft-grid">
+    <div>
+      <img src="/uploads/logo-pimpao.svg" alt="Pimpão Casa de Festas" class="ft-logo" />
+      <p class="ft-about">A casa de festas onde cada momento vira memória. Você curte, a gente cuida.</p>
+      <div style="display:flex;gap:10px;">
+        <a href={instagramUrl} target="_blank" rel="noopener" aria-label="Instagram" class="ft-soc ft-soc-ig"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"></circle></svg></a>
+        <a href={waLink} target="_blank" rel="noopener" aria-label="WhatsApp" class="ft-soc ft-soc-wa"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"></path></svg></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="ft-h">Contato</h4>
+      <div class="ft-links">
+        <a href={waLink} target="_blank" rel="noopener">WhatsApp · (51) 99135-5903</a>
+        <a href={instagramUrl} target="_blank" rel="noopener">@pimpaobuffeteventos</a>
+        <span>@arterosa.festas</span>
+        <span>Av. Flores da Cunha, 713<br>Cachoeirinha (Parada 49) · RS</span>
+      </div>
+    </div>
+    <div>
+      <h4 class="ft-h">Navegação</h4>
+      <div class="ft-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#estrutura">Estrutura</a>
+        <a href="#recreacao">Recreação</a>
+        <a href="#festas">Tipos de festa</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#orcamento">Orçamento</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="ft-h">Onde estamos</h4>
+      <div class="ft-map">
+        <iframe title="Mapa Pimpão" src="https://www.google.com/maps?q=Av.+Flores+da+Cunha,+713,+Cachoeirinha+RS&output=embed" loading="lazy"></iframe>
+      </div>
+      <p style="font:600 14px 'Nunito',sans-serif;color:#c8bed4;margin:12px 0 0;">Visitas com hora marcada — agende pelo WhatsApp.</p>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© {ano} Pimpão Casa de Festas. Todos os direitos reservados.</span>
+    <span>Cachoeirinha e região metropolitana de Porto Alegre.</span>
+  </div>
+</footer>

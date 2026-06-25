@@ -1,0 +1,13 @@
+{
+  "name": "pimpao-site",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev --port 4350 --host",
+    "build": "astro build",
+    "preview": "astro preview --port 4350"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  }
+}
