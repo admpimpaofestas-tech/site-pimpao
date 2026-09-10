@@ -25,6 +25,7 @@ export const festas = [
   { nome: 'Festas Brincantes', tag: 'Energia & movimento', desc: 'Foco total na energia da criançada: recreação guiada, gincanas e muita diversão. Praticidade sem abrir mão da qualidade.', accent: '#1d7567', tint: '#e9f5f2', popular: false },
   { nome: 'Festas Clássicas', tag: 'O equilíbrio perfeito', desc: 'Estrutura impecável, gastronomia premium e recreação mágica. A experiência completa que une sofisticação e diversão.', accent: '#c85f3c', tint: '#fdeee7', popular: true },
   { nome: 'Festa Exclusiva', tag: 'Experiência VIP', desc: 'Personalização 360°: identidade visual, gastronomia gourmet e atrações exclusivas. O projeto dos sonhos ganhando vida.', accent: '#a9802a', tint: '#fdf3da', popular: false },
+  { nome: 'Festas Adultas & Celebrações', tag: 'Para toda a família', desc: 'Formatura, aniversário adulto, chá de bebê, chá revelação, batizado e confraternizações. Estrutura completa, gastronomia caprichada e decoração sob medida para celebrar em qualquer idade.', accent: '#2f5d8a', tint: '#eaf1f8', popular: false },
 ];
 
 const galTints = ['#e9f5f2', '#fdeee7', '#fdf3da', '#eaf1f8'];
@@ -43,6 +44,7 @@ export const faqs = [
   { q: 'Qual a área de atendimento?', a: 'Estamos na Av. Flores da Cunha, 713 — Cachoeirinha (Parada 49) e atendemos toda a região metropolitana de Porto Alegre.' },
   { q: 'Quais as formas de pagamento?', a: 'Parcele em até 10x sem juros no cartão, ganhe 5% de desconto à vista no PIX, ou use o parcelamento direto com a casa, sem cartão. Consulte condições especiais.' },
   { q: 'A recreação está inclusa?', a: 'Sim! Somos a única casa da região com recreação inclusa: recreação guiada, camarim de pintura, esculturas em balões e a famosa baladinha infantil, sem custo adicional.' },
+  { q: 'Vocês fazem festas para adultos?', a: 'Sim! Além das festas infantis, recebemos formaturas, aniversários de adultos, chá de bebê, chá revelação, batizados e confraternizações. A estrutura, o buffet e a decoração são adaptados para cada tipo de celebração.' },
   { q: 'Vocês personalizam o tema da festa?', a: 'Com certeza. Adaptamos toda a recreação e a decoração ao universo do aniversariante — para meninos e meninas, do super-herói ao mundo encantado.' },
   { q: 'Qual a capacidade do espaço?', a: 'Nosso salão climatizado tem 400m² com playground completo. Informe o número estimado de convidados no orçamento e indicamos a melhor opção.' },
 ];

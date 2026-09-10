@@ -23,14 +23,26 @@ const recreacao = [
 ];
 
 const festas = [
-  { nome: 'Festas Brincantes', tag: 'Energia & movimento', desc: 'Foco total na energia da criançada: recreação guiada, gincanas e muita diversão. Praticidade sem abrir mão da qualidade.', accent: '#1d7567', tint: '#e9f5f2', popular: false },
-  { nome: 'Festas Clássicas', tag: 'O equilíbrio perfeito', desc: 'Estrutura impecável, gastronomia premium e recreação mágica. A experiência completa que une sofisticação e diversão.', accent: '#c85f3c', tint: '#fdeee7', popular: true },
-  { nome: 'Festa Exclusiva', tag: 'Experiência VIP', desc: 'Personalização 360°: identidade visual, gastronomia gourmet e atrações exclusivas. O projeto dos sonhos ganhando vida.', accent: '#a9802a', tint: '#fdf3da', popular: false },
+  { nome: 'Festas Brincantes', tag: 'Energia & movimento', desc: 'Foco total na energia da criançada: recreação guiada, gincanas e muita diversão. Praticidade sem abrir mão da qualidade.', accent: '#1d7567', tint: '#e9f5f2', popular: false, img: '/uploads/pimpao-festas-recreacao-gincana-bambole-criancas.webp', alt: 'Crianças brincando em gincana com bambolês na Festa Brincante do Pimpão' },
+  { nome: 'Festas Clássicas', tag: 'O equilíbrio perfeito', desc: 'Estrutura impecável, gastronomia premium e recreação mágica. A experiência completa que une sofisticação e diversão.', accent: '#c85f3c', tint: '#fdeee7', popular: true, img: '/uploads/pimpao-festas-mascote-pimpao-abraco-crianca.webp', alt: 'Menina abraçando o mascote Pimpão durante festa infantil' },
+  { nome: 'Festa Exclusiva', tag: 'Experiência VIP', desc: 'Personalização 360°: identidade visual, gastronomia gourmet e atrações exclusivas. O projeto dos sonhos ganhando vida.', accent: '#a9802a', tint: '#fdf3da', popular: false, img: '/uploads/pimpao-festas-mascote-pimpao-playground-menina.webp', alt: 'Aniversariante com vestido temático ao lado do mascote Pimpão no playground' },
+  { nome: 'Festas Adultas & Celebrações', tag: 'Para toda a família', desc: 'Formatura, aniversário adulto, chá de bebê, chá revelação, batizado e confraternizações. Estrutura completa, gastronomia caprichada e decoração sob medida para celebrar em qualquer idade.', accent: '#2f5d8a', tint: '#eaf1f8', popular: false, img: '/uploads/pimpao-festas-salao-climatizado-mesa-de-jogos-baloes.webp', pos: 'center 62%', alt: 'Salão climatizado do Pimpão decorado com balões para celebrações' },
 ];
 
-const galTints = ['#e9f5f2', '#fdeee7', '#fdf3da', '#eaf1f8'];
-const galLabels = ['Festa temática', 'Decoração', 'Recreação', 'Mascote Pimpão', 'Playground', 'Mesa de doces', 'Baladinha', 'Camarim'];
-const galeria = galLabels.map((label, i) => ({ label, tint: galTints[i % galTints.length] }));
+const galeria = [
+  { label: 'Mascote Pimpão', src: '/uploads/pimpao-festas-mascote-pimpao-com-aniversariante.webp', alt: 'Mascote Pimpão posando com aniversariante em festa infantil em Cachoeirinha' },
+  { label: 'Recreação guiada', src: '/uploads/pimpao-festas-recreacao-guiada-brincadeira-criancas.webp', alt: 'Recreador conduzindo brincadeira com grupo de crianças' },
+  { label: 'Camarim de pintura', src: '/uploads/pimpao-festas-camarim-pintura-facial-menino.webp', alt: 'Pintura facial artística em menino no camarim do Pimpão' },
+  { label: 'Big Jump', src: '/uploads/pimpao-festas-big-jump-crianca-pulando.webp', alt: 'Criança saltando no Big Jump da casa de festas Pimpão' },
+  { label: 'Brinquedão', src: '/uploads/pimpao-festas-brinquedao-piscina-de-bolinhas.webp', alt: 'Brinquedão com piscina de bolinhas no playground do Pimpão' },
+  { label: 'Gincana', src: '/uploads/pimpao-festas-recreacao-gincana-bambole-criancas.webp', alt: 'Crianças correndo em gincana com bambolês' },
+  { label: 'Campo de futebol', src: '/uploads/pimpao-festas-campo-de-futebol-infantil.webp', alt: 'Mini campo de futebol infantil com grama sintética' },
+  { label: 'Pintura artística', src: '/uploads/pimpao-festas-camarim-pintura-artistica-menina.webp', alt: 'Menina recebendo pintura artística no rosto' },
+  { label: 'Carrossel de carrinhos', src: '/uploads/pimpao-festas-salao-brinquedao-carrossel-de-carrinhos.webp', alt: 'Salão do Pimpão com brinquedão e carrossel de carrinhos' },
+  { label: 'Mascote Pimpão', src: '/uploads/pimpao-festas-mascote-pimpao-abraco-crianca.webp', alt: 'Menina abraçando o mascote Pimpão' },
+  { label: 'Playground', src: '/uploads/pimpao-festas-brinquedao-carrossel-cama-elastica.webp', alt: 'Playground com brinquedão, carrossel e cama elástica' },
+  { label: 'Cama elástica', src: '/uploads/pimpao-festas-cama-elastica-big-jump-salao.webp', alt: 'Cama elástica Big Jump no salão decorado com balões' },
+];
 
 const depBase = [
   { nome: 'Carolina Morche', festa: 'Aniversário de 2 anos do Lucca', av: '#56a99b', txt: 'Pimpão foi a melhor escolha pro aniversário do nosso pequeno Lucca. Da decoração de Dino Baby aos garçons, às meninas no atendimento e ao pessoal dos brinquedos. Tudo entregue com excelência. Foi um momento incrível e nos sentimos imensamente amados. Recomendo muito!' },
@@ -44,6 +56,7 @@ const faqs = [
   { q: 'Qual a área de atendimento?', a: 'Estamos na Av. Flores da Cunha, 713 — Cachoeirinha (Parada 49) e atendemos toda a região metropolitana de Porto Alegre.' },
   { q: 'Quais as formas de pagamento?', a: 'Parcele em até 10x sem juros no cartão, ganhe 5% de desconto à vista no PIX, ou use o parcelamento direto com a casa, sem cartão. Consulte condições especiais.' },
   { q: 'A recreação está inclusa?', a: 'Sim! Somos a única casa da região com recreação inclusa: recreação guiada, camarim de pintura, esculturas em balões e a famosa baladinha infantil, sem custo adicional.' },
+  { q: 'Vocês fazem festas para adultos?', a: 'Sim! Além das festas infantis, recebemos formaturas, aniversários de adultos, chá de bebê, chá revelação, batizados e confraternizações. A estrutura, o buffet e a decoração são adaptados para cada tipo de celebração.' },
   { q: 'Vocês personalizam o tema da festa?', a: 'Com certeza. Adaptamos toda a recreação e a decoração ao universo do aniversariante — para meninos e meninas, do super-herói ao mundo encantado.' },
   { q: 'Qual a capacidade do espaço?', a: 'Nosso salão climatizado tem 400m² com playground completo. Informe o número estimado de convidados no orçamento e indicamos a melhor opção.' },
 ];
@@ -92,7 +105,7 @@ const faqs = [
   <div class="hero-content">
     <span class="hero-badge"><span class="dot-yellow"></span>Casa de festas infantis · Cachoeirinha</span>
     <h1 class="hero-title">Onde cada festa vira <span style="color:#f7b24a;">memória</span> inesquecível</h1>
-    <p class="hero-sub">Festas mágicas para meninos e meninas em Cachoeirinha e região. <strong style="color:#fff;">Você curte, a gente cuida.</strong></p>
+    <p class="hero-sub">Festas mágicas para meninos e meninas — e celebrações para adultos, formaturas e chás de bebê — em Cachoeirinha e região. <strong style="color:#fff;">Você curte, a gente cuida.</strong></p>
     <div style="margin:26px 0 0;">
       <a href="#orcamento" class="btn-cta-lg">Solicitar Orçamento</a>
     </div>
@@ -111,7 +124,7 @@ const faqs = [
       <div class="card-lift">
         <div class="ic ic-teal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></div>
         <h3 class="h3">Localização privilegiada</h3>
-        <p class="muted">Ponto estratégico com fácil acesso e total conveniência — Av. Flores da Cunha, Cachoeirinha.</p>
+        <p class="muted">Ponto estratégico com fácil acesso e total conveniência — Av. Flores da Cunha, 713. Cachoeirinha.</p>
       </div>
       <div class="card-lift">
         <div class="ic ic-teal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a2 2 0 0 0 4 0V3M7 11v10"></path><path d="M16 3c-1.5 0-2.5 2-2.5 5s1 5 2.5 5 2.5-2 2.5-5-1-5-2.5-5zM16 13v8"></path></svg></div>
@@ -147,9 +160,9 @@ const faqs = [
         </div>
       </div>
       <div class="estrutura-grid">
-        <div class="ph ph-teal" style="grid-row:span 2;min-height:100%;"><span class="ph-tag">salão 400m²</span></div>
-        <div class="ph ph-yellow" style="aspect-ratio:1;"><span class="ph-tag">brinquedão</span></div>
-        <div class="ph ph-orange" style="aspect-ratio:1;"><span class="ph-tag">área baby</span></div>
+        <div class="ph ph-teal" style="grid-row:span 2;min-height:100%;"><img src="/uploads/pimpao-festas-salao-playground-cama-elastica-area-baby.webp" alt="Salão climatizado de 400m² do Pimpão com playground, cama elástica e área baby" width="1050" height="1400" loading="lazy" /></div>
+        <div class="ph ph-yellow" style="aspect-ratio:1;"><img src="/uploads/pimpao-festas-brinquedao-piscina-de-bolinhas.webp" alt="Brinquedão com piscina de bolinhas" width="1050" height="1400" loading="lazy" /></div>
+        <div class="ph ph-orange" style="aspect-ratio:1;"><img src="/uploads/pimpao-festas-salao-brinquedao-carrossel-de-carrinhos.webp" alt="Carrossel de carrinhos e brinquedão no salão" width="1050" height="1400" loading="lazy" /></div>
       </div>
     </div>
   </div>
@@ -179,7 +192,7 @@ const faqs = [
     </div>
     <div class="mascote">
       <div style="flex:none;width:clamp(140px,22vw,190px);">
-        <div class="mascote-ph"><span>foto do<br>mascote Pimpão</span></div>
+        <div class="mascote-ph"><img src="/uploads/pimpao-festas-mascote-pimpao-com-aniversariante.webp" alt="Mascote Pimpão com aniversariante" width="935" height="1400" loading="lazy" /></div>
       </div>
       <div style="flex:1 1 300px;min-width:260px;">
         <span class="pill pill-gold">A atração mais esperada</span>
@@ -196,13 +209,13 @@ const faqs = [
     <div class="sec-head" style="margin-bottom:46px;">
       <span class="pill pill-orange">Tipos de festa</span>
       <h2 class="h2">Um estilo de festa para cada sonho</h2>
-      <p class="lead">Da celebração mais brincante à experiência exclusiva e personalizada. Conte o que você imagina e montamos um orçamento sob medida.</p>
+      <p class="lead">Da celebração mais brincante à experiência exclusiva e personalizada — para crianças e também para adultos: formaturas, aniversários, chá de bebê e muito mais. Conte o que você imagina e montamos um orçamento sob medida.</p>
     </div>
     <div class="festas-grid">
       {festas.map((f) => (
         <div class="festa-card">
           <div class="festa-img" style={`background:${f.tint};`}>
-            <span class="ph-tag">foto · {f.nome}</span>
+            <img src={f.img} alt={f.alt} width="1400" height="935" loading="lazy" style={f.pos ? `object-position:${f.pos};` : ""} />
             {f.popular && <span class="badge-pop">Mais popular</span>}
           </div>
           <div class="festa-body">
@@ -252,12 +265,12 @@ const faqs = [
     <div class="sec-head" style="margin-bottom:44px;">
       <span class="pill pill-teal">Portfólio</span>
       <h2 class="h2">Festas que já aconteceram aqui</h2>
-      <p class="lead">Um pouquinho da magia que montamos. Clique para ampliar — em breve, com as fotos reais dos eventos.</p>
+      <p class="lead">Um pouquinho da magia que montamos. Clique para ampliar.</p>
     </div>
     <div class="galeria-grid">
       {galeria.map((g, i) => (
-        <button class="gal-item js-gal" data-index={i} data-label={g.label} data-tint={g.tint} style={`background:${g.tint};`}>
-          <span class="ph-tag">{g.label}</span>
+        <button class="gal-item js-gal" data-index={i} data-label={g.label} data-src={g.src} data-alt={g.alt} aria-label={`Ampliar foto: ${g.label}`}>
+          <img src={g.src} alt={g.alt} width="700" height="700" loading="lazy" />
           <span class="gal-zoom">⤢</span>
         </button>
       ))}
@@ -349,6 +362,9 @@ const faqs = [
               <option value="Aniversário infantil">Aniversário infantil</option>
               <option value="Festa temática">Festa temática</option>
               <option value="Chá de bebê / revelação">Chá de bebê / revelação</option>
+              <option value="Aniversário adulto">Aniversário adulto</option>
+              <option value="Formatura">Formatura</option>
+              <option value="Batizado / confraternização">Batizado / confraternização</option>
               <option value="Festa Brincante">Festa Brincante</option>
               <option value="Festa Clássica">Festa Clássica</option>
               <option value="Festa Exclusiva">Festa Exclusiva</option>
@@ -419,7 +435,7 @@ const faqs = [
 <!-- ============ LIGHTBOX ============ -->
 <div id="lightbox" class="lb" hidden>
   <div class="lb-card-wrap">
-    <div id="lbCard" class="lb-card"><span id="lbLabel" class="lb-label"></span></div>
+    <div id="lbCard" class="lb-card"><img id="lbImg" src="" alt="" /><span id="lbLabel" class="lb-label"></span></div>
     <button id="lbClose" class="lb-close" aria-label="Fechar">×</button>
   </div>
 </div>
@@ -461,9 +477,11 @@ const faqs = [
   const lb = document.getElementById('lightbox');
   const lbCard = document.getElementById('lbCard');
   const lbLabel = document.getElementById('lbLabel');
-  const openLb = (label, tint) => {
+  const lbImg = document.getElementById('lbImg');
+  const openLb = (label, src, alt) => {
     lbLabel.textContent = label;
-    lbCard.style.background = tint;
+    lbImg.src = src;
+    lbImg.alt = alt || label;
     lb.hidden = false;
     document.body.style.overflow = 'hidden';
   };
@@ -472,7 +490,7 @@ const faqs = [
     document.body.style.overflow = '';
   };
   document.querySelectorAll('.js-gal').forEach((b) => {
-    b.addEventListener('click', () => openLb(b.dataset.label, b.dataset.tint));
+    b.addEventListener('click', () => openLb(b.dataset.label, b.dataset.src, b.dataset.alt));
   });
   lb.addEventListener('click', (e) => {
     if (e.target === lb || e.target.id === 'lbClose') closeLb();
@@ -591,7 +609,8 @@ const faqs = [
   .chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: #fff; border: 1px solid #ece3d5; font: 700 14px 'Nunito', sans-serif; color: #4a4450; }
   .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
   .estrutura-grid { flex: 1 1 320px; min-width: 280px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .ph { border-radius: 22px; display: grid; place-items: center; }
+  .ph { border-radius: 22px; display: grid; place-items: center; overflow: hidden; }
+  .ph img, .mascote-ph img, .festa-img img, .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .ph-teal { background: repeating-linear-gradient(135deg,#e9f5f2 0 18px,#dff0eb 18px 36px); }
   .ph-yellow { background: repeating-linear-gradient(135deg,#fdf3da 0 18px,#faecc8 18px 36px); }
   .ph-orange { background: repeating-linear-gradient(135deg,#fdeee7 0 18px,#fae0d4 18px 36px); }
@@ -617,10 +636,11 @@ const faqs = [
   .mascote-txt { font: 600 clamp(15px,1.6vw,17px)/1.55 'Nunito', sans-serif; color: #e2f3ef; margin: 0; }
 
   /* ---- FESTAS ---- */
-  .festas-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 22px; }
+  .festas-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 22px; }
   .festa-card { position: relative; background: #fdf8f1; border: 1px solid #f0e8db; border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; transition: transform .18s, box-shadow .18s; }
   .festa-card:hover { transform: translateY(-6px); box-shadow: 0 24px 46px -24px rgba(0,0,0,.2); }
-  .festa-img { aspect-ratio: 16/10; position: relative; display: grid; place-items: center; }
+  .festa-img { aspect-ratio: 16/10; position: relative; display: grid; place-items: center; overflow: hidden; }
+  .festa-img img { position: absolute; inset: 0; }
   .badge-pop { position: absolute; top: 14px; right: 14px; padding: 6px 13px; border-radius: 999px; background: #ec7a55; color: #fff; font: 800 11px/1 'Nunito', sans-serif; letter-spacing: .03em; text-transform: uppercase; }
   .festa-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
   .festa-tag { font: 800 12px/1 'Nunito', sans-serif; letter-spacing: .05em; text-transform: uppercase; }
@@ -694,8 +714,9 @@ const faqs = [
   .lb { position: fixed; inset: 0; z-index: 90; background: rgba(40,34,46,.86); backdrop-filter: blur(4px); display: grid; place-items: center; padding: 24px; }
   .lb[hidden] { display: none; }
   .lb-card-wrap { position: relative; width: min(620px,92vw); }
-  .lb-card { aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; display: grid; place-items: center; border: 4px solid #fff; }
-  .lb-label { font-family: ui-monospace, monospace; font-size: 14px; color: #fff; background: rgba(0,0,0,.25); padding: 8px 16px; border-radius: 999px; }
+  .lb-card { position: relative; border-radius: 24px; overflow: hidden; display: grid; place-items: center; border: 4px solid #fff; background: #1f1a24; }
+  .lb-card img { display: block; width: 100%; max-height: 82vh; object-fit: contain; }
+  .lb-label { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: ui-monospace, monospace; font-size: 14px; color: #fff; background: rgba(0,0,0,.45); padding: 8px 16px; border-radius: 999px; }
   .lb-close { position: absolute; top: -16px; right: -16px; width: 44px; height: 44px; border: none; border-radius: 50%; background: #fff; color: #3a3340; font-size: 22px; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,.3); }
 
   /* ---- WHATSAPP FAB ---- */
