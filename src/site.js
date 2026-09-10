@@ -42,7 +42,7 @@ export const depoimentos = depBase.map((d) => ({ ...d, inicial: d.nome.charAt(0)
 export const faqs = [
   { q: 'Com quanta antecedência preciso reservar?', a: 'Recomendamos reservar com pelo menos 30 a 60 dias de antecedência, especialmente para fins de semana. Fale com a gente: às vezes conseguimos encaixar datas mais próximas.' },
   { q: 'Qual a área de atendimento?', a: 'Estamos na Av. Flores da Cunha, 713 — Cachoeirinha (Parada 49) e atendemos toda a região metropolitana de Porto Alegre.' },
-  { q: 'Quais as formas de pagamento?', a: 'Parcele em até 10x sem juros no cartão, ganhe 5% de desconto à vista no PIX, ou use o parcelamento direto com a casa, sem cartão. Consulte condições especiais.' },
+  { q: 'Quais as formas de pagamento?', a: 'Parcele em até 10x no cartão (juros conforme taxas da operadora), ganhe 5% de desconto à vista no PIX, ou use o parcelamento direto com a casa, sem cartão. Consulte condições especiais.' },
   { q: 'A recreação está inclusa?', a: 'Sim! Somos a única casa da região com recreação inclusa: recreação guiada, camarim de pintura, esculturas em balões e a famosa baladinha infantil, sem custo adicional.' },
   { q: 'Vocês fazem festas para adultos?', a: 'Sim! Além das festas infantis, recebemos formaturas, aniversários de adultos, chá de bebê, chá revelação, batizados e confraternizações. A estrutura, o buffet e a decoração são adaptados para cada tipo de celebração.' },
   { q: 'Vocês personalizam o tema da festa?', a: 'Com certeza. Adaptamos toda a recreação e a decoração ao universo do aniversariante — para meninos e meninas, do super-herói ao mundo encantado.' },
