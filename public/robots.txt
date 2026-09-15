@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /home-geo
+
+Sitemap: https://pimpao.com.br/sitemap.xml

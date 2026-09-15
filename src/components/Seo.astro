@@ -1,0 +1,59 @@
+---
+// Meta tags de SEO + compartilhamento social. Uso: <Seo title="..." description="..." path="/" jsonLd={...} />
+const SITE = 'https://pimpao.com.br';
+const {
+  title,
+  description,
+  path = '/',
+  ogImage = '/uploads/og-pimpao-casa-de-festas.jpg',
+  ogImageAlt = 'Salão climatizado da Pimpão Casa de Festas em Cachoeirinha decorado para festa infantil',
+  noindex = false,
+  jsonLd = null,
+  preloadHero = true,
+} = Astro.props;
+const url = SITE + path;
+const image = ogImage.startsWith('http') ? ogImage : SITE + ogImage;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+<meta name="author" content="Pimpão Casa de Festas" />
+<meta name="theme-color" content="#fdf8f1" />
+<meta name="geo.region" content="BR-RS" />
+<meta name="geo.placename" content="Cachoeirinha, Rio Grande do Sul" />
+
+<!-- Open Graph (WhatsApp, Facebook, Instagram, LinkedIn) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Pimpão Casa de Festas" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta property="og:image:secure_url" content={image} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
+
+<!-- Ícones -->
+<link rel="icon" type="image/svg+xml" href="/uploads/logo-pimpao.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/uploads/apple-touch-icon.png" />
+
+<!-- Performance: fontes e imagem do topo (LCP) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{preloadHero && <link rel="preload" as="image" href="/uploads/fundo-hero.webp" fetchpriority="high" />}
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline></script>}

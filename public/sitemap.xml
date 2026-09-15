@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://pimpao.com.br/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://pimpao.com.br/uploads/og-pimpao-casa-de-festas.jpg</image:loc><image:title>Pimpão Casa de Festas em Cachoeirinha</image:title></image:image>
+    <video:video>
+      <video:thumbnail_loc>https://i.ytimg.com/vi/ybwNBCEjdVc/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Visita virtual Pimpão</video:title>
+      <video:description>Tour em vídeo pelo salão climatizado, playground, área baby e espaço de recreação da Pimpão Casa de Festas em Cachoeirinha.</video:description>
+      <video:player_loc>https://www.youtube-nocookie.com/embed/ybwNBCEjdVc</video:player_loc>
+      <video:duration>400</video:duration>
+    </video:video>
+  </url>
+</urlset>

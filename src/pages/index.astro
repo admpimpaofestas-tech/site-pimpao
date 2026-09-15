@@ -1,5 +1,6 @@
 ---
 import Tracking from "../components/Tracking.astro";
+import Seo from "../components/Seo.astro";
 import VisitaVirtual from "../components/VisitaVirtual.astro";
 // ====== CONFIGURAÇÕES (edite aqui) ======
 const whatsappNumber = '5551991355903';
@@ -62,6 +63,77 @@ const faqs = [
   { q: 'Vocês personalizam o tema da festa?', a: 'Com certeza. Adaptamos toda a recreação e a decoração ao universo do aniversariante — para meninos e meninas, do super-herói ao mundo encantado.' },
   { q: 'Qual a capacidade do espaço?', a: 'Nosso salão climatizado tem 400m² com playground completo. Informe o número estimado de convidados no orçamento e indicamos a melhor opção.' },
 ];
+
+// ====== SEO ======
+const SITE = 'https://pimpao.com.br';
+const metaTitle = 'Casa de Festas Infantil em Cachoeirinha | Pimpão Festas';
+const metaDesc = 'Casa de festas em Cachoeirinha, RS: salão climatizado de 400m², playground, buffet e recreação inclusa. Festas infantis e para adultos. Peça seu orçamento!';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': SITE + '/#organization',
+      name: 'Pimpão Casa de Festas',
+      url: SITE,
+      logo: { '@type': 'ImageObject', url: SITE + '/uploads/logo-pimpao.svg' },
+      sameAs: [instagramUrl],
+    },
+    {
+      '@type': ['LocalBusiness', 'EventVenue'],
+      '@id': SITE + '/#localbusiness',
+      name: 'Pimpão Casa de Festas',
+      description: metaDesc,
+      url: SITE,
+      image: [SITE + '/uploads/og-pimpao-casa-de-festas.jpg', SITE + '/uploads/pimpao-festas-salao-playground-cama-elastica-area-baby.webp'],
+      logo: SITE + '/uploads/logo-pimpao.svg',
+      telephone: '+' + waNum,
+      priceRange: '$$',
+      parentOrganization: { '@id': SITE + '/#organization' },
+      address: { '@type': 'PostalAddress', streetAddress: 'Av. Flores da Cunha, 713', addressLocality: 'Cachoeirinha', addressRegion: 'RS', addressCountry: 'BR' },
+      areaServed: ['Cachoeirinha', 'Gravataí', 'Canoas', 'Porto Alegre', 'Alvorada', 'Região Metropolitana de Porto Alegre'].map((c) => ({ '@type': 'City', name: c })),
+      sameAs: [instagramUrl],
+      makesOffer: festas.map((f) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: f.nome, description: f.desc } })),
+      amenityFeature: atracaoNomes.map((n) => ({ '@type': 'LocationFeatureSpecification', name: n, value: true })),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': SITE + '/#website',
+      url: SITE,
+      name: 'Pimpão Casa de Festas',
+      publisher: { '@id': SITE + '/#organization' },
+      inLanguage: 'pt-BR',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': SITE + '/#webpage',
+      url: SITE,
+      name: metaTitle,
+      description: metaDesc,
+      isPartOf: { '@id': SITE + '/#website' },
+      about: { '@id': SITE + '/#localbusiness' },
+      inLanguage: 'pt-BR',
+      primaryImageOfPage: SITE + '/uploads/og-pimpao-casa-de-festas.jpg',
+    },
+    {
+      '@type': 'VideoObject',
+      '@id': SITE + '/#visita-virtual',
+      name: 'Visita virtual Pimpão',
+      description: 'Tour em vídeo pelo salão climatizado, playground, área baby e espaço de recreação da Pimpão Casa de Festas em Cachoeirinha.',
+      thumbnailUrl: ['https://i.ytimg.com/vi/ybwNBCEjdVc/hqdefault.jpg', SITE + '/uploads/pimpao-festas-salao-playground-cama-elastica-area-baby.webp'],
+      uploadDate: '2026-09-01',
+      duration: 'PT6M40S',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/ybwNBCEjdVc',
+      contentUrl: 'https://www.youtube.com/watch?v=ybwNBCEjdVc',
+      publisher: { '@id': SITE + '/#organization' },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': SITE + '/#faq',
+      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    },
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -69,12 +141,7 @@ const faqs = [
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pimpão Casa de Festas · Cachoeirinha</title>
-  <meta name="description" content="Festas mágicas para meninos e meninas em Cachoeirinha e região. Você curte, a gente cuida." />
-  <link rel="icon" type="image/svg+xml" href="/uploads/logo-pimpao.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <Seo title={metaTitle} description={metaDesc} path="/" jsonLd={jsonLd} />
   <Tracking />
 </head>
 <body>
