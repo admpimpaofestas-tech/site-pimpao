@@ -1,0 +1,221 @@
+---
+// Tracking Pimpão — Meta Pixel + Advanced Matching + CAPI (via Worker) + Google Ads (gtag)
+// IDs vêm do .env (PUBLIC_*). Sem ID configurado, aquele lado fica desligado.
+const PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
+const GADS_ID = import.meta.env.PUBLIC_GADS_ID || ''; // ex.: AW-123456789
+const GADS_LEAD_LABEL = import.meta.env.PUBLIC_GADS_LEAD_LABEL || ''; // ex.: AbCdEfGhIj
+const TRACK_ENDPOINT = import.meta.env.PUBLIC_TRACK_ENDPOINT || ''; // ex.: https://pimpao-tracking.SEU.workers.dev/event
+const CONTENT_NAME = 'Landing Pimpão Festas';
+const enabled = Boolean(PIXEL_ID || GADS_ID);
+---
+
+{enabled && (
+  <script is:inline define:vars={{ PIXEL_ID, GADS_ID, GADS_LEAD_LABEL, TRACK_ENDPOINT, CONTENT_NAME }}>
+    (function () {
+      'use strict';
+
+      // ---------- persistência dual: cookie + localStorage ----------
+      function setCookie(k, v, d) {
+        var e = new Date(Date.now() + d * 864e5).toUTCString();
+        document.cookie = k + '=' + encodeURIComponent(v) + ';expires=' + e + ';path=/;SameSite=Lax';
+      }
+      function getCookie(k) {
+        var m = document.cookie.match('(^|;)\\s*' + k + '\\s*=\\s*([^;]+)');
+        return m ? decodeURIComponent(m.pop()) : '';
+      }
+      function store(k, v, days) {
+        try { localStorage.setItem(k, v); } catch (e) {}
+        setCookie(k, v, days || 180);
+      }
+      function load(k) {
+        try { return localStorage.getItem(k) || getCookie(k); } catch (e) { return getCookie(k); }
+      }
+
+      // ---------- normalização (IDÊNTICA ao Worker) ----------
+      function normEmail(s) { return (s || '').toString().trim().toLowerCase(); }
+      function normPhone(s) {
+        var d = (s || '').toString().replace(/\D/g, '');
+        if (!d) return '';
+        if ((d.length === 10 || d.length === 11) && d.indexOf('55') !== 0) d = '55' + d;
+        return d;
+      }
+      function normName(s) {
+        return (s || '').toString().trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z]/g, '');
+      }
+      function splitName(full) {
+        var p = (full || '').toString().trim().split(/\s+/);
+        return { fn: p[0] || '', ln: p.length > 1 ? p[p.length - 1] : '' };
+      }
+
+      // ---------- identidade do visitante + lead salvo ----------
+      function visitorId() {
+        var id = load('fop_vid');
+        if (!id) {
+          id = window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'v' + Date.now() + Math.random().toString(36).slice(2);
+          store('fop_vid', id, 365);
+        }
+        return id;
+      }
+      function loadLead() { try { return JSON.parse(load('fop_lead') || '{}'); } catch (e) { return {}; } }
+      function saveLead(d) { store('fop_lead', JSON.stringify(d), 365); }
+
+      // ---------- ids de clique (gclid / fbclid) + UTMs ----------
+      var qs = new URLSearchParams(location.search);
+      ['gclid', 'gbraid', 'wbraid'].forEach(function (k) { if (qs.get(k)) store('pmp_' + k, qs.get(k), 90); });
+      var fbclid = qs.get('fbclid');
+      if (fbclid && !getCookie('_fbc')) setCookie('_fbc', 'fb.1.' + Date.now() + '.' + fbclid, 90);
+      var utm = {};
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { if (qs.get(k)) utm[k] = qs.get(k); });
+      if (Object.keys(utm).length) store('pmp_utm', JSON.stringify(utm), 90);
+      function clickIds() {
+        var u = {};
+        try { u = JSON.parse(load('pmp_utm') || '{}'); } catch (e) {}
+        return { gclid: load('pmp_gclid') || '', gbraid: load('pmp_gbraid') || '', wbraid: load('pmp_wbraid') || '', utm: u };
+      }
+
+      // ---------- Meta Pixel ----------
+      var VID = visitorId();
+      function amFromLead(L) {
+        return {
+          em: normEmail(L.em), ph: normPhone(L.ph), fn: normName(L.fn), ln: normName(L.ln),
+          external_id: VID
+        };
+      }
+      if (PIXEL_ID) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+        (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', PIXEL_ID, amFromLead(loadLead()));
+      }
+
+      // ---------- Google Ads (gtag) ----------
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      if (GADS_ID) {
+        var gs = document.createElement('script');
+        gs.async = true;
+        gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GADS_ID);
+        document.head.appendChild(gs);
+        gtag('js', new Date());
+        gtag('config', GADS_ID, { allow_enhanced_conversions: true });
+      }
+
+      // ---------- dispatcher: Pixel (browser) + Worker (CAPI) com o MESMO event_id ----------
+      var sent = {};
+      function send(name, custom, lead) {
+        if (sent[name]) return;
+        sent[name] = true;
+        var eid = name + '_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+        custom = custom || {};
+        if (PIXEL_ID) fbq('track', name, custom, { eventID: eid });
+        if (TRACK_ENDPOINT) {
+          var L = loadLead();
+          var am = amFromLead(L);
+          var payload = {
+            event_name: name, event_id: eid, page_url: location.href, external_id: VID,
+            user_data: { em: am.em, ph: am.ph, fn: am.fn, ln: am.ln },
+            fbp: getCookie('_fbp'), fbc: getCookie('_fbc'),
+            custom_data: custom,
+            lead: Object.assign({}, clickIds(), lead || {})
+          };
+          try {
+            fetch(TRACK_ENDPOINT, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+              body: JSON.stringify(payload)
+            }).catch(function () {});
+          } catch (e) {}
+        }
+        return eid;
+      }
+      window.PMP = { send: send, visitorId: visitorId, loadLead: loadLead };
+
+      // 1) PageView
+      send('PageView', {});
+
+      // 2) ViewContent — scroll 25% ou 10s
+      // 3) AddToWishlist — chegou na seção de orçamento (ou scroll 50%)
+      function scrollPct() {
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        return h > 0 ? (window.scrollY / h) * 100 : 100;
+      }
+      var vc = { content_name: CONTENT_NAME, content_category: 'festa_infantil' };
+      window.addEventListener('scroll', function () {
+        var p = scrollPct();
+        if (p >= 25) send('ViewContent', vc);
+        if (p >= 50) send('AddToWishlist', vc);
+      }, { passive: true });
+      setTimeout(function () { send('ViewContent', vc); }, 10000);
+
+      function ready(fn) { document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn(); }
+      ready(function () {
+        var orc = document.getElementById('orcamento');
+        if (orc && 'IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { send('AddToWishlist', vc); io.disconnect(); } });
+          }, { threshold: 0.3 });
+          io.observe(orc);
+        }
+
+        // ---------- formulário de orçamento ----------
+        var form = document.getElementById('orcForm');
+        function readForm() {
+          if (!form) return {};
+          var fd = new FormData(form);
+          var v = function (k) { return (fd.get(k) || '').toString().trim(); };
+          var n = splitName(v('nome'));
+          return { nome: v('nome'), fn: n.fn, ln: n.ln, ph: v('telefone'), tipo: v('tipo'), data_evento: v('data'), convidados: v('convidados') };
+        }
+        function captureLead(d) {
+          if (!d.fn && !d.ph) return;
+          var prev = loadLead();
+          var merged = { em: prev.em || '', ph: d.ph || prev.ph || '', fn: d.fn || prev.fn || '', ln: d.ln || prev.ln || '' };
+          saveLead(merged);
+          if (PIXEL_ID) fbq('init', PIXEL_ID, amFromLead(merged)); // re-hidrata o AM
+          if (GADS_ID) {
+            var ud = {};
+            if (merged.ph) ud.phone_number = '+' + normPhone(merged.ph);
+            if (merged.em) ud.email = normEmail(merged.em);
+            if (merged.fn) ud.address = { first_name: merged.fn, last_name: merged.ln || '' };
+            gtag('set', 'user_data', ud);
+          }
+        }
+        function googleLead(eid, source) {
+          if (!GADS_ID || !GADS_LEAD_LABEL) return;
+          gtag('event', 'conversion', { send_to: GADS_ID + '/' + GADS_LEAD_LABEL, transaction_id: eid, lead_source: source });
+        }
+
+        if (form) {
+          // 4) Contact — preencheu nome + telefone
+          form.addEventListener('change', function () {
+            var d = readForm();
+            if (d.fn && normPhone(d.ph).length >= 12) {
+              captureLead(d);
+              send('Contact', { content_name: CONTENT_NAME });
+            }
+          });
+          // 5) Lead — enviou o formulário (abre o WhatsApp)
+          form.addEventListener('submit', function () {
+            var d = readForm();
+            captureLead(d);
+            var eid = send('Lead', { content_name: 'formulario_orcamento', content_category: d.tipo || 'festa' },
+              { nome: d.nome, tipo: d.tipo, data_evento: d.data_evento, convidados: d.convidados });
+            if (eid) googleLead(eid, 'formulario');
+          });
+        }
+
+        // 5b) Lead — clicou em qualquer botão de WhatsApp
+        document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp.com"]').forEach(function (a) {
+          a.addEventListener('click', function () {
+            var eid = send('Lead', { content_name: 'whatsapp_botao', content_category: 'festa' });
+            if (eid) googleLead(eid, 'whatsapp');
+          });
+        });
+      });
+    })();
+  </script>
+)}
+{enabled && PIXEL_ID && (
+  <noscript><img height="1" width="1" style="display:none" alt="" src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`} /></noscript>
+)}

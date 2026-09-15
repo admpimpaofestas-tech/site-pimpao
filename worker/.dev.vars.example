@@ -1,0 +1,7 @@
+# Copie para worker/.dev.vars para testar localmente (npm run dev). NÃO commitar .dev.vars.
+META_PIXEL_ID=
+META_CAPI_TOKEN=
+# Código de teste do Events Manager (TESTxxxxx). Vazio em produção.
+META_TEST_CODE=
+# Chave para baixar /leads.csv (header x-admin-key)
+ADMIN_KEY=

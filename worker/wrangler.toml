@@ -1,0 +1,14 @@
+name = "pimpao-tracking"
+main = "src/index.js"
+compatibility_date = "2026-05-01"
+
+# Variáveis públicas (não sensíveis). Os segredos vão via `wrangler secret put`:
+#   META_PIXEL_ID, META_CAPI_TOKEN, META_TEST_CODE (opcional), ADMIN_KEY
+[vars]
+ALLOWED_ORIGINS = "https://pimpao.com.br,https://www.pimpao.com.br,http://localhost:4350"
+
+# KV para guardar leads (hidratação cross-device + export p/ Google Ads offline).
+# Crie com: npx wrangler kv namespace create LEADS  -> cole o id abaixo
+[[kv_namespaces]]
+binding = "LEADS"
+id = "5de1927ed1fb464f9a32bb48518e1869"
