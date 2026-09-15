@@ -1,4 +1,6 @@
 ---
+import Tracking from "../components/Tracking.astro";
+import VisitaVirtual from "../components/VisitaVirtual.astro";
 // ============================================================
 //  HOME-GEO — versão de teste otimizada para GEO (Generative
 //  Engine Optimization). Mantém identidade visual, layout,
@@ -289,6 +291,7 @@ const ogImage = SITE + '/uploads/fundo-hero.webp';
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline></script>
+  <Tracking />
 </head>
 <body>
 
@@ -414,6 +417,8 @@ const ogImage = SITE + '/uploads/fundo-hero.webp';
     </div>
   </div>
 </section>
+
+<VisitaVirtual tone="sec-cream" />
 
 <!-- ============ RECREAÇÃO + MASCOTE ============ -->
 <section id="recreacao" class="sec sec-green">

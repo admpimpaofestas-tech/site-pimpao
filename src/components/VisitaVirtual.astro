@@ -1,0 +1,64 @@
+---
+// Seção "Visita virtual" — vídeo do YouTube com carregamento sob demanda (clique = carrega o player).
+const { tone = 'sec-white' } = Astro.props;
+const YT_ID = 'ybwNBCEjdVc';
+const poster = '/uploads/pimpao-festas-salao-playground-cama-elastica-area-baby.webp';
+---
+
+<!-- ============ VISITA VIRTUAL ============ -->
+<section id="visita-virtual" class={`sec ${tone}`}>
+  <div class="wrap">
+    <div class="sec-head vv-head">
+      <span class="pill pill-gold">Conheça antes de visitar</span>
+      <h2 class="h2 vv-title">Faça uma visita virtual ao Pimpão</h2>
+      <p class="lead">Dê um giro pelo salão climatizado, playground, área baby e espaço de recreação sem sair de casa. Depois, venha conhecer pessoalmente!</p>
+    </div>
+    <div class="vv-frame">
+      <button type="button" class="vv-play js-vv-play" data-yt={YT_ID} aria-label="Assistir ao vídeo: Visita virtual Pimpão">
+        <img src={poster} alt="Salão climatizado do Pimpão decorado para festa, capa do vídeo da visita virtual" width="1050" height="1400" loading="lazy" />
+        <span class="vv-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor"><path d="M8 5.5v13l11-6.5z"></path></svg>
+        </span>
+        <span class="vv-label" aria-hidden="true">▶ Visita virtual · Conheça o espaço</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vv-head { max-width: 920px; margin-bottom: 34px; }
+  .vv-title { white-space: nowrap; }
+  @media (max-width: 860px) { .vv-title { white-space: normal; } }
+  .vv-frame { width: 100%; max-width: 400px; margin: 0 auto; border-radius: 24px; overflow: hidden; background: #3a3340; box-shadow: 0 24px 48px -20px rgba(58,51,64,.45); aspect-ratio: 9 / 16; position: relative; }
+  .vv-play { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+  .vv-play img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+  .vv-play:hover img { transform: scale(1.03); }
+  .vv-play::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(58,51,64,.05) 0%, rgba(58,51,64,.55) 100%); }
+  .vv-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 88px; height: 88px; border-radius: 50%; background: #ec7a55; color: #fff; display: grid; place-items: center; z-index: 2; box-shadow: 0 16px 32px -10px rgba(236,122,85,.8); animation: pulsate 2.4s infinite; transition: transform .15s; }
+  .vv-btn svg { margin-left: 5px; }
+  .vv-play:hover .vv-btn { transform: translate(-50%,-50%) scale(1.08); }
+  .vv-label { position: absolute; left: 22px; bottom: 18px; z-index: 2; color: #fff; font: 800 14px/1 'Nunito', sans-serif; letter-spacing: .04em; text-transform: uppercase; background: rgba(0,0,0,.35); padding: 10px 14px; border-radius: 999px; backdrop-filter: blur(6px); }
+  .vv-frame :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  @media (max-width: 600px) {
+    .vv-frame { border-radius: 16px; }
+    .vv-btn { width: 66px; height: 66px; }
+    .vv-btn svg { width: 26px; height: 26px; }
+    .vv-label { font-size: 12px; left: 14px; bottom: 12px; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.js-vv-play').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.yt;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      iframe.title = 'Visita virtual Pimpão';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;display:block';
+      btn.replaceWith(iframe);
+      if ((window as any).PMP) (window as any).PMP.send('ViewContent', { content_name: 'Visita virtual Pimpão', content_category: 'video' });
+    });
+  });
+</script>

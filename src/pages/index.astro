@@ -1,4 +1,6 @@
 ---
+import Tracking from "../components/Tracking.astro";
+import VisitaVirtual from "../components/VisitaVirtual.astro";
 // ====== CONFIGURAÇÕES (edite aqui) ======
 const whatsappNumber = '5551991355903';
 const instagramUrl = 'https://instagram.com/pimpaobuffeteventos';
@@ -73,6 +75,7 @@ const faqs = [
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <Tracking />
 </head>
 <body>
 
@@ -167,6 +170,8 @@ const faqs = [
     </div>
   </div>
 </section>
+
+<VisitaVirtual tone="sec-white" />
 
 <!-- ============ RECREAÇÃO + MASCOTE ============ -->
 <section id="recreacao" class="sec sec-green">
