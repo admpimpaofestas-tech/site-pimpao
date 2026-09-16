@@ -1,16 +1,18 @@
 ---
 // Tracking Pimpão — Meta Pixel + Advanced Matching + CAPI (via Worker) + Google Ads (gtag)
 // IDs vêm do .env (PUBLIC_*). Sem ID configurado, aquele lado fica desligado.
+// Valores públicos: o .env sobrescreve, mas há um padrão para o build de produção funcionar sem .env.
 const PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
+const GA4_ID = import.meta.env.PUBLIC_GA4_ID ?? 'G-J1XEQ4376K'; // Google Analytics 4
 const GADS_ID = import.meta.env.PUBLIC_GADS_ID || ''; // ex.: AW-123456789
 const GADS_LEAD_LABEL = import.meta.env.PUBLIC_GADS_LEAD_LABEL || ''; // ex.: AbCdEfGhIj
-const TRACK_ENDPOINT = import.meta.env.PUBLIC_TRACK_ENDPOINT || ''; // ex.: https://pimpao-tracking.SEU.workers.dev/event
+const TRACK_ENDPOINT = import.meta.env.PUBLIC_TRACK_ENDPOINT ?? 'https://pimpao-tracking.adm-pimpaofestas.workers.dev/event';
 const CONTENT_NAME = 'Landing Pimpão Festas';
-const enabled = Boolean(PIXEL_ID || GADS_ID);
+const enabled = Boolean(PIXEL_ID || GADS_ID || GA4_ID);
 ---
 
 {enabled && (
-  <script is:inline define:vars={{ PIXEL_ID, GADS_ID, GADS_LEAD_LABEL, TRACK_ENDPOINT, CONTENT_NAME }}>
+  <script is:inline define:vars={{ PIXEL_ID, GA4_ID, GADS_ID, GADS_LEAD_LABEL, TRACK_ENDPOINT, CONTENT_NAME }}>
     (function () {
       'use strict';
 
@@ -90,16 +92,18 @@ const enabled = Boolean(PIXEL_ID || GADS_ID);
         fbq('init', PIXEL_ID, amFromLead(loadLead()));
       }
 
-      // ---------- Google Ads (gtag) ----------
+      // ---------- Google Analytics 4 + Google Ads (um único gtag.js) ----------
       window.dataLayer = window.dataLayer || [];
       function gtag() { window.dataLayer.push(arguments); }
-      if (GADS_ID) {
+      var GTAG_MAIN = GA4_ID || GADS_ID;
+      if (GTAG_MAIN) {
         var gs = document.createElement('script');
         gs.async = true;
-        gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GADS_ID);
+        gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GTAG_MAIN);
         document.head.appendChild(gs);
         gtag('js', new Date());
-        gtag('config', GADS_ID, { allow_enhanced_conversions: true });
+        if (GA4_ID) gtag('config', GA4_ID);
+        if (GADS_ID) gtag('config', GADS_ID, { allow_enhanced_conversions: true });
       }
 
       // ---------- dispatcher: Pixel (browser) + Worker (CAPI) com o MESMO event_id ----------
@@ -182,8 +186,8 @@ const enabled = Boolean(PIXEL_ID || GADS_ID);
           }
         }
         function googleLead(eid, source) {
-          if (!GADS_ID || !GADS_LEAD_LABEL) return;
-          gtag('event', 'conversion', { send_to: GADS_ID + '/' + GADS_LEAD_LABEL, transaction_id: eid, lead_source: source });
+          if (GA4_ID) gtag('event', 'generate_lead', { send_to: GA4_ID, lead_source: source, transaction_id: eid });
+          if (GADS_ID && GADS_LEAD_LABEL) gtag('event', 'conversion', { send_to: GADS_ID + '/' + GADS_LEAD_LABEL, transaction_id: eid, lead_source: source });
         }
 
         if (form) {
