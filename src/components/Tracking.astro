@@ -2,11 +2,11 @@
 // Tracking Pimpão — Meta Pixel + Advanced Matching + CAPI (via Worker) + Google Ads (gtag)
 // IDs vêm do .env (PUBLIC_*). Sem ID configurado, aquele lado fica desligado.
 // Valores públicos: o .env sobrescreve, mas há um padrão para o build de produção funcionar sem .env.
-const PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '';
-const GA4_ID = import.meta.env.PUBLIC_GA4_ID ?? 'G-J1XEQ4376K'; // Google Analytics 4
+const PIXEL_ID = import.meta.env.PUBLIC_META_PIXEL_ID || '24518690781131738'; // Meta Pixel / conjunto de dados
+const GA4_ID = import.meta.env.PUBLIC_GA4_ID || 'G-J1XEQ4376K'; // Google Analytics 4
 const GADS_ID = import.meta.env.PUBLIC_GADS_ID || ''; // ex.: AW-123456789
 const GADS_LEAD_LABEL = import.meta.env.PUBLIC_GADS_LEAD_LABEL || ''; // ex.: AbCdEfGhIj
-const TRACK_ENDPOINT = import.meta.env.PUBLIC_TRACK_ENDPOINT ?? 'https://pimpao-tracking.adm-pimpaofestas.workers.dev/event';
+const TRACK_ENDPOINT = import.meta.env.PUBLIC_TRACK_ENDPOINT || 'https://pimpao-tracking.adm-pimpaofestas.workers.dev/event';
 const CONTENT_NAME = 'Landing Pimpão Festas';
 const enabled = Boolean(PIXEL_ID || GADS_ID || GA4_ID);
 ---
